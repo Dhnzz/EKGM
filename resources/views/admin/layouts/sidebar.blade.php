@@ -2,7 +2,7 @@
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="" class="text-nowrap">
+            <a href="{{route('dashboard')}}" class="text-nowrap">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/front/img/favicon.png') }}" width="50">
                     <h4 class="mb-0 px-2 fw-bolder">ADMIN PANEL</h4>
@@ -32,11 +32,19 @@
                     <span class="hide-menu">Master</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{(request()->routeIs('kuesioner'. $active) ? 'active' : '')}}" href="{{ route('kuesioner.index') }}" aria-expanded="false">
+                    <a class="sidebar-link {{(request()->routeIs('kuesioner*') ? 'active' : '')}}" href="{{ route('kuesioner.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-layout-dashboard"></i>
                         </span>
                         <span class="hide-menu">Kuesioner</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{(request()->routeIs('article*') ? 'active' : '')}}" href="{{ route('article.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                        </span>
+                        <span class="hide-menu">Artikel</span>
                     </a>
                 </li>
             </ul>

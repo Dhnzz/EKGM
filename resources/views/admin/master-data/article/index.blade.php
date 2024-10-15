@@ -18,8 +18,8 @@
         <div class="card-body">
             <div class="row w-100">
                 <div class="col-12 d-flex justify-content-md-end justify-content-end mt-3 mt-md-0">
-                    <a href="{{ route('kuesioner.create') }}" class="btn btn-info d-flex align-items-center">
-                        <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah Kuesioner
+                    <a href="{{ route('article.create') }}" class="btn btn-info d-flex align-items-center">
+                        <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah Artikel
                     </a>
                 </div>
             </div>
@@ -46,9 +46,8 @@
         <thead>
             <tr>
                 <th class="text-center">No</th>
-                <th class="text-center">Nama</th>
-                <th class="text-center">Jumlah Butir Pertanyaan</th>
-                <th class="text-center">Status</th>
+                <th class="text-center">Cover</th>
+                <th class="text-center">Judul</th>
                 <th class="text-center">Opsi</th>
             </tr>
         </thead>
@@ -56,30 +55,15 @@
             @php
                 $no = 1;
             @endphp
-            @foreach ($kuesioner_data as $item)
+            @foreach ($article_data as $item)
                 <tr>
                     <td class="text-center">{{ $no++ }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td class="text-center">{{ $item->question->count() }}</td>
-                    <td class="text-center">
-                        @if ($item->isActive == 0)
-                            <span class="badge text-bg-danger">Tidak Aktif</span>
-                        @elseif ($item->isActive == 1)
-                            <span class="badge text-bg-success">Aktif</span>
-                        @endif
-                    </td>
+                    <td>{{ $item->cover }}</td>
+                    <td>{{ $item->title }}</td>
                     <td class="text-center">
                         <div class="d-flex flex-row gap-2 justify-content-center">
                             <div>
-                                <a href="{{ route('kuesioner.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
-                            </div>
-                            <div>
-                                <form action="{{ route('kuesioner.status_change', $item->id) }}" class="inline-form"
-                                    enctype="multipart/form-data" method="post">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-sm btn-warning">Ubah Status</button>
-                                </form>
+                                <a href="{{ route('article.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
                             </div>
                         </div>
                     </td>
