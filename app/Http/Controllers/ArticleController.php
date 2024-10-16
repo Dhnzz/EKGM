@@ -23,7 +23,10 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Data Atikel';
+        $active = 'artikel';
+        $subtitle = 'Tambah Artikel';
+        return view('admin.master-data.article.create', compact('subtitle', 'title', 'active'));
     }
 
     /**
