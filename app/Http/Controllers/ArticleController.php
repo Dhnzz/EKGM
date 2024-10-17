@@ -35,65 +35,134 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'cover' => 'required|mimes:png,jpg,jpeg',
-            'content' => 'required'
-        ],[
-            'title.required' => 'Harap isi kolom judul',
-            'cover.required' => 'Harap masukkan cover',
-            'cover.required' => 'Harap masukkan format PNG, JPG, atau JPEG',
-            'content.required' => 'Harap isi kolom konten',
-        ]);
+        $request->validate(
+            [
+                'title' => 'required',
+                'cover' => 'required|mimes:png,jpg,jpeg',
+                'content' => 'required',
+            ],
+            [
+                'title.required' => 'Harap isi kolom judul',
+                'cover.required' => 'Harap masukkan cover',
+                'cover.required' => 'Harap masukkan format PNG, JPG, atau JPEG',
+                'content.required' => 'Harap isi kolom konten',
+            ],
+        );
         $slug = Str::slug($request['title']);
 
         $image = $request->file('cover');
-        $imageName = time() . '-' . rand(1,100) . '-' . $slug .'.'.$image->extension();
+        $imageName = time() . '-' . rand(1, 100) . '-' . $slug . '.' . $image->extension();
         $image->move(public_path('uploads/article/image'), $imageName);
 
         $article = Article::create([
             'title' => $request['title'],
             'content' => $request['content'],
-            'cover' => $imageName
+            'cover' => $imageName,
         ]);
 
         if ($article) {
             return redirect()->route('article.index')->with('success', 'Berhasil menambahkan artikel');
-        }else{
+        } else {
             return redirect()->route('article.index')->with('error', 'Gagal menambahkan artikel');
         }
-        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
+    public function show($id)
     {
-        //
+        $title = 'Data Artikel';
+        $active = 'artikel';
+        $subtitle = 'Detail Artikel';
+        $article = Article::findOrFail($id);
+        if ($article) {
+            return view('admin.master-data.article.show', compact('article', 'title', 'active', 'subtitle'));
+        } else {
+            return redirect()->route('article.index')->with('error', 'Artikel tidak ditemukan');
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Article $article)
+    public function edit($id)
     {
-        //
+        $title = 'Data Artikel';
+        $active = 'artikel';
+        $subtitle = 'Detail Artikel';
+        $article = Article::findOrFail($id);
+
+        if ($article) {
+            return view('admin.master-data.article.edit', compact('title', 'active', 'subtitle', 'article'));
+        } else {
+            return redirect()->route('article.index')->with('success', 'Artikel tidak ditemukan');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'title' => 'required',
+                'cover' => 'mimes:png,jpg,jpeg',
+                'content' => 'required',
+            ],
+            [
+                'title.required' => 'Harap isi kolom judul',
+                'cover.required' => 'Harap masukkan cover',
+                'content.required' => 'Harap isi kolom konten',
+            ],
+        );
+        $article = Article::findOrFail($id);
+
+        if ($request->hasFile('cover')) {
+            $current_cover = $request->input('current_cover');
+            $image = $request['cover'];
+            $slug = Str::slug($request['title']);
+            $imageName = time() . '-' . rand(1, 100) . '-' . $slug . '.' . $image->extension();
+            $image->move(public_path('uploads/article/image'), $imageName);
+
+            if ($current_cover) {
+                unlink(public_path('uploads/article/image/' . $current_cover));
+            }
+            $articleUpdate = $article->update([
+                'title' => $request['title'],
+                'content' => $request['content'],
+                'cover' => $imageName,
+            ]);
+        } else {
+            $articleUpdate = $article->update([
+                'title' => $request['title'],
+                'content' => $request['content'],
+            ]);
+        }
+        if ($article) {
+            return redirect()->route('article.index')->with('success', 'Berhasil mengubah artikel');
+        } else {
+            return redirect()->route('article.index')->with('error', 'Gagal mengubah artikel');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        //
+        $article = Article::findOrFail($id);
+
+        $image = $article->cover;
+
+        unlink(public_path('uploads/article/image/'.$image));
+        
+        $articleDelete = $article->delete();
+        if ($articleDelete) {
+            return redirect()->route('article.index')->with('success', 'Berhasil menghapus artikel');
+        }else {
+            return redirect()->route('article.index')->with('error', 'Gagal menghapus artikel');
+        }
     }
 }

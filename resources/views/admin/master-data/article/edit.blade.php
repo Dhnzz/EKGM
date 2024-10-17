@@ -18,7 +18,7 @@
     </div>
 
     <div class="card">
-        <form action="{{ route('kuesioner.update', $data->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('article.update', $article->id) }}" method="post" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="card-body">
@@ -26,76 +26,57 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="mb-3">
-                            <label class="control-label mb-1">Nama Kuesioner <span class="text-danger">*</span></label>
-                            <input type="text" name="name" value="{{ $data->name }}"
-                                class="form-control @error('name') is-invalid @enderror" placeholder="..."
-                                value="{{ old('name') }}" />
-                            @error('name')
+                            <label class="control-label mb-1">Nama Artikel <span class="text-danger">*</span></label>
+                            <input type="text" name="title" value="{{ $article->title }}"
+                                class="form-control @error('title') is-invalid @enderror" placeholder="..."
+                                value="{{ old('title') }}" />
+                            @error('title')
                                 <small class="invalid-feedback">
                                     {{ $message }}
                                 </small>
                             @enderror
                         </div>
-                        <button type="button" class="btn btn-secondary btn-sm mt-1 mb-3"
-                            onclick="addQuestionField()">Tambah
-                            Pertanyaan</button>
-                        <div class="questionContainer">
-                            @foreach ($data->question as $item)
-                                <div class="mb-3">
-                                    <label class="control-label mb-1">Pertanyaan 1<span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <input type="text" name="questions[{{$loop->index}}][id]" class="form-control" value="{{$item->id}}" placeholder="..." />
-                                        <input type="text" name="questions[{{$loop->index}}][question]" class="form-control" value="{{$item->question}}" placeholder="..." />
-                                        <button type="button" class="btn btn-danger btn-sm"
-                                            onclick="removeQuestionField(this)">Hapus</button>
-                                    </div>
+                        <div class="mb-3 d-flex flex-row gap-5 align-items-center" width="100">
+                            <div class="card mb-0">
+                                <div class="card-body p-2">
+                                    <img id="cover-preview" src="{{ asset('uploads/article/image/' . $article->cover) }}" width="200px" alt="">
                                 </div>
-                            @endforeach
+                            </div>
+                            <div class="flex-fill">
+                                <label class="control-label mb-1">Cover Artikel<span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="file" name="cover" id="cover-input" class="form-control @error('cover') is-invalid @enderror" placeholder="..." />
+                                    <input type="hidden" name="current_cover" value="{{ $article->cover ?? '' }}" />
+                                </div>
+                                @error('cover')
+                                    <small class="invalid-feedback">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+                            </div>
                         </div>
+
                         <script>
-                            function addQuestionField() {
-                                const questionField = document.createElement('div');
-                                questionField.classList.add('mb-3');
-                                // Menghitung jumlah pertanyaan yang ada saat ini
-                                const questionCount = document.querySelectorAll('.questionsContainer .mb-3').length + 1;
-                                questionField.innerHTML = `
-                                    <label class="control-label mb-1">Pertanyaan ${questionCount} <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <input type="text" name="questions[]" class="form-control" placeholder="..." />
-                                        <button type="button" class="btn btn-danger btn-sm" onclick="removeQuestionField(this)">Hapus</button>
-                                    </div>
-                                `;
-
-                                // Menambahkan elemen baru di bawah elemen terakhir mb-3
-                                const lastElement = document.querySelector('.questionContainer .mb-3');
-                                if (lastElement) {
-                                    lastElement.insertAdjacentElement('afterend', questionField);
-                                } else {
-                                    // Jika tidak ada elemen mb-3, tambahkan ke parent
-                                    document.querySelector('.form-actions').before(questionField);
+                            document.getElementById('cover-input').addEventListener('change', function(event) {
+                                const reader = new FileReader();
+                                reader.onload = function(e) {
+                                    document.getElementById('cover-preview').src = e.target.result;
                                 }
-
-                                // Memperbarui penomoran semua pertanyaan
-                                updateQuestionNumbers();
-                            }
-
-                            function removeQuestionField(element) {
-                                element.parentNode.parentNode.remove();
-                                // Memperbarui penomoran setelah penghapusan
-                                updateQuestionNumbers();
-                            }
-
-                            function updateQuestionNumbers() {
-                                // Ambil semua elemen pertanyaan
-                                const questions = document.querySelectorAll('.questionsContainer .mb-3');
-                                questions.forEach((question, index) => {
-                                    // Temukan label dalam pertanyaan dan perbarui teks
-                                    const label = question.querySelector('label');
-                                    label.innerHTML = `Pertanyaan ${index + 1} <span class="text-danger">*</span>`;
-                                });
-                            }
+                                reader.readAsDataURL(event.target.files[0]);
+                            });
                         </script>
-
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Isi konten<span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <textarea name="content" id="" cols="30" class="form-control @error('content') is-invalid @enderror"
+                                    rows="10">{{ $article->content }}</textarea>
+                            </div>
+                            @error('content')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
                     </div>
                 </div>
             </div>
