@@ -17,8 +17,8 @@ class Responden extends Model
         'birth_date',
     ];
 
-    public function kuesioner(): BelongsToMany
+    public function question(): BelongsToMany
     {
-        return $this->belongsToMany(Kuesioner::class, 'respon_kuesioner')->withPivot('isActive');
+        return $this->belongsToMany(Question::class, 'answer_respondens')->withPivot('answer');
     }
 }

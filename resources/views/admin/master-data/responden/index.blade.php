@@ -40,6 +40,20 @@
                 </div>
             </div>
         </div>
+    @elseif ($message = Session::get('error'))
+        <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert"
+            id="danger-alert">
+            <div class="d-flex gap-2 align-items-center">
+                <div>
+                    <span class="d-inline-flex p-1 rounded-circle border-2 border-white mb-0">
+                        <i class="fs-5 ti ti-check"></i>
+                    </span>
+                </div>
+                <div>
+                    {{ $message ?? '' }}
+                </div>
+            </div>
+        </div>
     @endif
 
     <table id="dataTable" class="table table-sm table-bordered" width="100%">
@@ -60,7 +74,8 @@
                     <td>{{ $item->name }}</td>
                     <td class="text-center align-middle">
                         <a href="{{ route('responden.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
-                        <a href="{{ route('responden.respond_kuesioner', $item->id) }}" class="btn btn-sm btn-success">Jawab Kuesioner</a>
+                        <a href="{{ route('responden.respond_kuesioner', $item->id) }}" class="btn btn-sm btn-success">Jawab
+                            Kuesioner</a>
                     </td>
                 </tr>
             @endforeach

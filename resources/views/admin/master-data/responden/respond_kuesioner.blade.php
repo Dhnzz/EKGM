@@ -26,11 +26,12 @@
                     <div class="col-12">
                         <div class="mb-3">
                             <label class="control-label mb-1">Pilih Kuesioner <span class="text-danger">*</span></label>
+                            <input type="hidden" name="responden_id" value="{{$responden->id}}">
                             <select name="kuesioner_id" id="kuesionerSelect" class="form-control">
                                 <option value="">Pilih Kuesioner</option>
                                 @foreach ($kuesioner as $item)
-                                    <option value="{{$item->id}}" data-questions="{{ $item->question->pluck('question') }}">
-                                        {{$item->name}} - Jumlah Pertanyaan: {{$item->question->count()}}
+                                    <option value="{{ $item->id }}" data-questions="{{ $item->question }}">
+                                        {{ $item->name }} - Jumlah Pertanyaan: {{ $item->question->count() }}
                                     </option>
                                 @endforeach
                             </select>
@@ -46,7 +47,8 @@
                                     if (selectedOption.value) {
                                         document.getElementById('kuesionerDetail').style.display = 'block';
                                         document.getElementById('kuesionerName').innerText = 'Nama: ' + selectedOption.text.split(' - ')[0];
-                                        document.getElementById('kuesionerQuestions').innerText = 'Jumlah Pertanyaan: ' + selectedOption.text.split(' - ')[1].split(': ')[1];
+                                        document.getElementById('kuesionerQuestions').innerText = 'Jumlah Pertanyaan: ' + selectedOption
+                                            .text.split(' - ')[1].split(': ')[1];
 
                                         var questions = JSON.parse(selectedOption.getAttribute('data-questions'));
                                         console.log(questions);
@@ -55,7 +57,17 @@
                                         questionList.innerHTML = '';
                                         questions.forEach(function(question) {
                                             var li = document.createElement('li');
-                                            li.innerText = question;
+                                            li.innerHTML = `
+                                                ${question.question} <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="answers[${question.id}]" id="inlineRadio1" value="1">
+                                                    <label class="form-check-label" for="inlineRadio1">Ya</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="answers[${question.id}]" id="inlineRadio2" value="0">
+                                                    <label class="form-check-label" for="inlineRadio2">Tidak</label>
+                                                </div>
+                                            `;
                                             questionList.appendChild(li);
                                         });
                                     } else {

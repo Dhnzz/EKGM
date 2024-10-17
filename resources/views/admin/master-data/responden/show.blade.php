@@ -2,8 +2,8 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         #sync1 .btn-nav-dark {
@@ -49,7 +49,8 @@
     <div class="shop-detail">
         <div class="card shadow-none border">
             <div class="card-body p-4">
-                <a href="{{ route('responden.index') }}" class="btn btn-sm btn-dark mb-3"><i class="ti ti-arrow-left"></i> Kembali ke {{ $title ?? '' }}</a>
+                <a href="{{ route('responden.index') }}" class="btn btn-sm btn-dark mb-3"><i class="ti ti-arrow-left"></i>
+                    Kembali ke {{ $title ?? '' }}</a>
 
                 <div class="row g-4">
                     <div class="col-12">
@@ -59,21 +60,42 @@
                             <h3 class="fw-semibold">{{ $responden->name ?? '' }}</h3>
                             <h5 class="mt-4">Email :</h5>
                             <h3 class="fw-semibold">{{ $responden->email ?? '' }}</h3>
-                            <p>Tanggal lahir : <span class="fw-bolder">{{$responden->birth_date}}</span></p>
+                            <p>Tanggal lahir : <span class="fw-bolder">{{ $responden->birth_date }}</span></p>
 
                             <hr class="divider">
                             <h5>Kuesioner yang diisi :</h5>
+                            <table id="dataTable" class="table table-sm table-bordered" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Kuesioner</th>
+                                        <th>Jumlah Pertanyaan</th>
+                                        <th>Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($responden->question as $item => $value)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->question->count() }}</td>
+                                            <td>Babi</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                             <div class="mt-3">
-                                <a href="{{ route('responden.edit', $responden->id) }}"
-                                    class="btn btn-warning">
+                                <a href="{{ route('responden.edit', $responden->id) }}" class="btn btn-warning">
                                     <i class="ti ti-pencil"></i> Edit Responden
                                 </a>
-                                <form action="{{ route('responden.delete', $responden->id) }}"
-                                    method="post" class="d-inline">
+                                <form action="{{ route('responden.delete', $responden->id) }}" method="post"
+                                    class="d-inline">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('Are you sure?')">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
                                         <i class="ti ti-trash"></i> Hapus Responden
                                     </button>
                                 </form>
@@ -110,5 +132,9 @@
                 ],
             });
         })
+    </script>
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
+    <script>
+        new DataTable('#dataTable');
     </script>
 @endpush

@@ -16,11 +16,6 @@ class Kuesioner extends Model
         'isActive',
     ];
 
-    public function responden(): BelongsToMany
-    {
-        return $this->belongsToMany(Responden::class, 'respon_kuesioner')->withPivot('isActive');
-    }
-
     public function question(): HasMany
     {
         return $this->hasMany(Question::class);

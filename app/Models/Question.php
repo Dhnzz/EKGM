@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
 
 use App\Models\Kuesioner;
 
@@ -19,5 +19,10 @@ class Question extends Model
     public function kuesioner(): BelongsTo
     {
         return $this->belongsTo(Kuesioner::class);
+    }
+
+    public function responden(): BelongsToMany
+    {
+        return $this->belongsToMany(Responden::class, 'answer_respondens')->withPivot('answer');
     }
 }

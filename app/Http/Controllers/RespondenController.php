@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Responden, Kuesioner};
+use App\Models\{Responden, Kuesioner, AnswerResponden};
 use Illuminate\Http\Request;
 
 class RespondenController extends Controller
@@ -69,7 +69,11 @@ class RespondenController extends Controller
         $active = 'responden';
         $subtitle = 'Detail Responden';
         $responden = Responden::findOrFail($id);
-        return view('admin.master-data.responden.show', compact('responden', 'title', 'active', 'subtitle'));
+        $question = $responden->question();
+        $kuesioner = $question->kuesioner;
+
+        dd($kuesioner);
+        return view('admin.master-data.responden.show', compact('responden', 'title', 'active', 'subtitle', 'responden','kuesioner'));
     }
 
     /**
@@ -137,6 +141,20 @@ class RespondenController extends Controller
         $subtitle = 'Respon Kuesioner';
         $responden = Responden::findOrFail($id);
         $kuesioner = Kuesioner::all();
-        return view('admin.master-data.responden.respond_kuesioner', compact('responden','kuesioner','title','subtitle'));
+        return view('admin.master-data.responden.respond_kuesioner', compact('responden', 'kuesioner', 'title', 'subtitle'));
+    }
+
+    public function respond(Request $request)
+    {
+        $responden = Responden::findOrFail($request['responden_id']);
+        foreach ($request->input('answers') as $item => $value) {
+            $checkAnswer = $responden->question->where('question_id', $item)->first();
+            if ($checkAnswer) {
+                $responden->question->updateExistingPivot($item, ['answer' => $value]);
+            }else{
+                $responden->question()->attach($item, ['answer' => $value]);
+            }
+        }
+        return redirect()->route('responden.index')->with('success', 'Berhasil menyimpan jawaban');
     }
 }
