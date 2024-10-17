@@ -58,14 +58,11 @@
             @foreach ($article_data as $item)
                 <tr>
                     <td class="text-center">{{ $no++ }}</td>
-                    <td>{{ $item->cover }}</td>
+                    <td class="text-center"><img src="{{ asset('uploads/article/image/' . $item->cover) }}" width="100px"
+                            alt=""></td>
                     <td>{{ $item->title }}</td>
-                    <td class="text-center">
-                        <div class="d-flex flex-row gap-2 justify-content-center">
-                            <div>
-                                <a href="{{ route('article.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
-                            </div>
-                        </div>
+                    <td class="text-center align-middle">
+                        <a href="{{ route('article.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
                     </td>
                 </tr>
             @endforeach

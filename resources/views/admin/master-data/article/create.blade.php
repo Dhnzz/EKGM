@@ -18,27 +18,43 @@
     </div>
 
     <div class="card">
-        <form action="{{ route('kuesioner.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('article.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <h5 class="mb-3">{{ $subtitle }} Form</h5>
                 <div class="row">
                     <div class="col-12">
                         <div class="mb-3">
-                            <label class="control-label mb-1">Nama Kuesioner <span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                                placeholder="..." value="{{ old('name') }}" />
-                            @error('name')
+                            <label class="control-label mb-1">Nama Artikel <span class="text-danger">*</span></label>
+                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
+                                placeholder="..." value="{{ old('title') }}" />
+                            @error('title')
                                 <small class="invalid-feedback">
                                     {{ $message }}
                                 </small>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="control-label mb-1">Pertanyaan 1<span class="text-danger">*</span></label>
+                            <label class="control-label mb-1">Cover Artikel<span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <input type="text" name="questions[]" class="form-control" placeholder="..." />
+                                <input type="file" name="cover" class="form-control @error('cover') is-invalid @enderror" placeholder="..." />
                             </div>
+                            @error('cover')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Isi konten<span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <textarea name="content" id="" cols="30" class="form-control @error('content') is-invalid @enderror" rows="10">{{ old('content') }}</textarea>
+                            </div>
+                            @error('content')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
                         </div>
                     </div>
                 </div>

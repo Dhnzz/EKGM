@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -34,7 +35,34 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'cover' => 'required|mimes:png,jpg,jpeg',
+            'content' => 'required'
+        ],[
+            'title.required' => 'Harap isi kolom judul',
+            'cover.required' => 'Harap masukkan cover',
+            'cover.required' => 'Harap masukkan format PNG, JPG, atau JPEG',
+            'content.required' => 'Harap isi kolom konten',
+        ]);
+        $slug = Str::slug($request['title']);
+
+        $image = $request->file('cover');
+        $imageName = time() . '-' . rand(1,100) . '-' . $slug .'.'.$image->extension();
+        $image->move(public_path('uploads/article/image'), $imageName);
+
+        $article = Article::create([
+            'title' => $request['title'],
+            'content' => $request['content'],
+            'cover' => $imageName
+        ]);
+
+        if ($article) {
+            return redirect()->route('article.index')->with('success', 'Berhasil menambahkan artikel');
+        }else{
+            return redirect()->route('article.index')->with('error', 'Gagal menambahkan artikel');
+        }
+        
     }
 
     /**
