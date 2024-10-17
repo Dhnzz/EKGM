@@ -38,7 +38,7 @@
                         <a href="{{ route('dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('article.index') }}" class="text-muted">{{ $title ?? '' }}</a>
+                        <a href="{{ route('responden.index') }}" class="text-muted">{{ $title ?? '' }}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">{{ $subtitle ?? '' }}</li>
                 </ol>
@@ -49,35 +49,32 @@
     <div class="shop-detail">
         <div class="card shadow-none border">
             <div class="card-body p-4">
-                <a href="{{ route('article.index') }}" class="btn btn-sm btn-dark mb-3"><i class="ti ti-arrow-left"></i> Kembali ke {{ $title ?? '' }}</a>
+                <a href="{{ route('responden.index') }}" class="btn btn-sm btn-dark mb-3"><i class="ti ti-arrow-left"></i> Kembali ke {{ $title ?? '' }}</a>
 
                 <div class="row g-4">
                     <div class="col-12">
                         <div class="shop-content">
 
-                            <div class="d-flex justify-content-center">
-                                <img src="{{ asset('uploads/article/image/'.$article->cover) }}" width="500px" alt="">
-                            </div>
-
-                            <h5>Judul Artikel :</h5>
-                            <h3 class="fw-semibold">{{ $article->title ?? '' }}</h3>
-                            <p>Dibuat tanggal : <span class="fw-bolder">{{$article->created_at}}</span></p>
+                            <h5>Nama :</h5>
+                            <h3 class="fw-semibold">{{ $responden->name ?? '' }}</h3>
+                            <h5 class="mt-4">Email :</h5>
+                            <h3 class="fw-semibold">{{ $responden->email ?? '' }}</h3>
+                            <p>Tanggal lahir : <span class="fw-bolder">{{$responden->birth_date}}</span></p>
 
                             <hr class="divider">
-                            <h5>Isi Konten :</h5>
-                            <p>{{ $article->content }}</p>
+                            <h5>Kuesioner yang diisi :</h5>
                             <div class="mt-3">
-                                <a href="{{ route('article.edit', $article->id) }}"
+                                <a href="{{ route('responden.edit', $responden->id) }}"
                                     class="btn btn-warning">
-                                    <i class="ti ti-pencil"></i> Edit Artikel
+                                    <i class="ti ti-pencil"></i> Edit Responden
                                 </a>
-                                <form action="{{ route('article.delete', $article->id) }}"
+                                <form action="{{ route('responden.delete', $responden->id) }}"
                                     method="post" class="d-inline">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger"
                                         onclick="return confirm('Are you sure?')">
-                                        <i class="ti ti-trash"></i> Hapus Artikel
+                                        <i class="ti ti-trash"></i> Hapus Responden
                                     </button>
                                 </form>
                             </div>

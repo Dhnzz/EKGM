@@ -16,6 +16,18 @@ Route::prefix('dashboard')->group(function(){
         Route::get('/', [RespondenController::class, 'index'])->name('responden.index');
     });
 
+    Route::prefix('responden')->group(function(){
+        Route::get('/', [RespondenController::class, 'index'])->name('responden.index');
+        Route::get('/create', [RespondenController::class, 'create'])->name('responden.create');
+        Route::post('/store', [RespondenController::class, 'store'])->name('responden.store');
+        Route::get('/show/{id}', [RespondenController::class, 'show'])->name('responden.show');
+        Route::get('/edit/{id}', [RespondenController::class, 'edit'])->name('responden.edit');
+        Route::put('/update/{id}', [RespondenController::class, 'update'])->name('responden.update');
+        Route::delete('/delete/{id}', [RespondenController::class, 'destroy'])->name('responden.delete');
+        Route::get('/respond_kuesioner/{id}', [RespondenController::class, 'respond_kuesioner'])->name('responden.respond_kuesioner');
+        Route::post('/respond/{id}', [RespondenController::class, 'respond'])->name('responden.respond');
+    });
+
     Route::prefix('kuesioner')->group(function(){
         Route::get('/', [KuesionerController::class, 'index'])->name('kuesioner.index');
         Route::get('/create', [KuesionerController::class, 'create'])->name('kuesioner.create');
@@ -25,6 +37,7 @@ Route::prefix('dashboard')->group(function(){
         Route::put('/update/{id}', [KuesionerController::class, 'update'])->name('kuesioner.update');
         Route::delete('/delete/{id}', [KuesionerController::class, 'destroy'])->name('kuesioner.delete');
         Route::put('/status_change/{id}', [KuesionerController::class, 'status_change'])->name('kuesioner.status_change');
+        Route::put('/show_responden/{id}', [KuesionerController::class, 'show_responden'])->name('kuesioner.show_responden');
     });
 
     Route::prefix('article')->group(function(){

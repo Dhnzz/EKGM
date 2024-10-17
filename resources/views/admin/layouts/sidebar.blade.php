@@ -32,6 +32,14 @@
                     <span class="hide-menu">Master</span>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link {{(request()->routeIs('responden*') ? 'active' : '')}}" href="{{ route('responden.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                        </span>
+                        <span class="hide-menu">Responden</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link {{(request()->routeIs('kuesioner*') ? 'active' : '')}}" href="{{ route('kuesioner.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-layout-dashboard"></i>

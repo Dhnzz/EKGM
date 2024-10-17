@@ -76,11 +76,7 @@ class ArticleController extends Controller
         $active = 'artikel';
         $subtitle = 'Detail Artikel';
         $article = Article::findOrFail($id);
-        if ($article) {
-            return view('admin.master-data.article.show', compact('article', 'title', 'active', 'subtitle'));
-        } else {
-            return redirect()->route('article.index')->with('error', 'Artikel tidak ditemukan');
-        }
+        return view('admin.master-data.article.show', compact('article', 'title', 'active', 'subtitle'));
     }
 
     /**
@@ -156,12 +152,12 @@ class ArticleController extends Controller
 
         $image = $article->cover;
 
-        unlink(public_path('uploads/article/image/'.$image));
-        
+        unlink(public_path('uploads/article/image/' . $image));
+
         $articleDelete = $article->delete();
         if ($articleDelete) {
             return redirect()->route('article.index')->with('success', 'Berhasil menghapus artikel');
-        }else {
+        } else {
             return redirect()->route('article.index')->with('error', 'Gagal menghapus artikel');
         }
     }

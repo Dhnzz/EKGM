@@ -34,21 +34,41 @@
                                 </small>
                             @enderror
                         </div>
-                        <div class="mb-3">
-                            <label class="control-label mb-1">Cover Artikel<span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <input type="file" name="cover" class="form-control @error('cover') is-invalid @enderror" placeholder="..." />
+                        <div class="mb-3 d-flex flex-row gap-5 align-items-center" width="100">
+                            <div class="card mb-0">
+                                <div class="card-body p-2">
+                                    <img id="cover-preview" src="{{ asset('uploads/article/image/default.jpg') }}"
+                                        width="200px" alt="">
+                                </div>
                             </div>
-                            @error('cover')
-                                <small class="invalid-feedback">
-                                    {{ $message }}
-                                </small>
-                            @enderror
+                            <div class="flex-fill">
+                                <label class="control-label mb-1">Cover Artikel<span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="file" name="cover" id="cover-input"
+                                        class="form-control @error('cover') is-invalid @enderror" placeholder="..." />
+                                </div>
+                                @error('cover')
+                                    <small class="invalid-feedback">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+                            </div>
                         </div>
+
+                        <script>
+                            document.getElementById('cover-input').addEventListener('change', function(event) {
+                                const reader = new FileReader();
+                                reader.onload = function(e) {
+                                    document.getElementById('cover-preview').src = e.target.result;
+                                }
+                                reader.readAsDataURL(event.target.files[0]);
+                            });
+                        </script>
                         <div class="mb-3">
                             <label class="control-label mb-1">Isi konten<span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <textarea name="content" id="" cols="30" class="form-control @error('content') is-invalid @enderror" rows="10">{{ old('content') }}</textarea>
+                                <textarea name="content" id="" cols="30" class="form-control @error('content') is-invalid @enderror"
+                                    rows="10">{{ old('content') }}</textarea>
                             </div>
                             @error('content')
                                 <small class="invalid-feedback">

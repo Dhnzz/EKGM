@@ -75,6 +75,9 @@
                                 <a href="{{ route('kuesioner.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
                             </div>
                             <div>
+                                <a href="{{ route('kuesioner.show_responden', $item->id) }}" class="btn btn-sm btn-success">Detail Responden</a>
+                            </div>
+                            <div>
                                 <form action="{{ route('kuesioner.status_change', $item->id) }}" class="inline-form"
                                     enctype="multipart/form-data" method="post">
                                     @csrf
