@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\{BelongsToMany, HasMany, HasManyThrough};
+use Illuminate\Database\Eloquent\Relations\{HasMany};
 
 use App\Models\ResponKuesioner;
 
@@ -13,13 +13,8 @@ class Responden extends Model
     use HasFactory;
     protected $fillable = ['email', 'name', 'birth_date'];
 
-    public function kuesioner(): BelongsToMany
+    public function kuesioner(): HasMany
     {
-        return $this->belongsToMany(Kuesioner::class);
-    }
-
-    public function answers(): HasManyThrough
-    {
-        return $this->hasManyThrough(Question::class, Kuesioner::class, 'responden_id', 'id','id','kuesioner_id');
+        return $this->hasMany(RespondenKuesioner::class);
     }
 }

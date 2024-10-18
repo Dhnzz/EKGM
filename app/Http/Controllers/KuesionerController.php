@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Kuesioner, Question};
+use App\Models\{Kuesioner, Question, Responden};
 use Illuminate\Http\Request;
 
 class KuesionerController extends Controller
@@ -138,5 +138,15 @@ class KuesionerController extends Controller
     {
         Kuesioner::find($id)->delete();
         return redirect()->route('kuesioner.index')->with('success', 'Berhasil menghapus kuesioner!');
+    }
+
+    public function show_responden($id)
+    {
+        $title = 'Data Kuesioner';
+        $active = 'kuesioner';
+        $subtitle = 'Detail Respons';
+        $data = Kuesioner::find($id);
+        $responden = Responden::with('kuesioner')->whereHas('kuesioner')->get();
+        return view('admin.master-data.kuesioner.show_responden', compact('subtitle', 'title', 'data', 'active', 'responden'));
     }
 }

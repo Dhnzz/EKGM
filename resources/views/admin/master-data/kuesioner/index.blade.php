@@ -61,7 +61,7 @@
                 <tr>
                     <td class="text-center">{{ $no++ }}</td>
                     <td>{{ $item->name }}</td>
-                    <td class="text-center">{{ $item->question->count() }}</td>
+                    <td class="text-center">{{ $item->questions->count() }}</td>
                     <td class="text-center">
                         @if ($item->isActive == 0)
                             <span class="badge text-bg-danger">Tidak Aktif</span>

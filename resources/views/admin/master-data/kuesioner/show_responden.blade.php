@@ -2,8 +2,8 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         #sync1 .btn-nav-dark {
@@ -49,7 +49,8 @@
     <div class="shop-detail">
         <div class="card shadow-none border">
             <div class="card-body p-4">
-                <a href="{{ route('kuesioner.index') }}" class="btn btn-sm btn-dark mb-3"><i class="ti ti-arrow-left"></i> Kembali ke {{ $title ?? '' }}</a>
+                <a href="{{ route('kuesioner.index') }}" class="btn btn-sm btn-dark mb-3"><i class="ti ti-arrow-left"></i>
+                    Kembali ke {{ $title ?? '' }}</a>
 
                 <div class="row g-4">
                     <div class="col-12">
@@ -57,32 +58,45 @@
 
                             <h5>Nama Kuesioner :</h5>
                             <h3 class="fw-semibold">{{ $data->name ?? '' }}</h3>
-                            <p>Dibuat tanggal : <span class="fw-bolder">{{$data->created_at}}</span></p>
+                            <p>Dibuat tanggal : <span class="fw-bolder">{{ $data->created_at }}</span></p>
 
                             <hr class="divider">
-                            <h5>Pertanyaan :</h5>
-                            <ol>
-                                @foreach ($data->question as $item)
-                                    <li>
-                                        {{$item->question}}
-                                    </li>
-                                @endforeach
-                            </ol>
-                            <div class="mt-3">
-                                <a href="{{ route('kuesioner.edit', $data->id) }}"
-                                    class="btn btn-warning">
-                                    <i class="ti ti-pencil"></i> Edit Kuesioner
-                                </a>
-                                <form action="{{ route('kuesioner.delete', $data->id) }}"
-                                    method="post" class="d-inline">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('Are you sure?')">
-                                        <i class="ti ti-trash"></i> Hapus Kuesioner
-                                    </button>
-                                </form>
-                            </div>
+                            <h5>Kuesioner yang diisi :</h5>
+                            <table id="dataTable" class="table table-sm table-bordered" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Responden</th>
+                                        <th>Email</th>
+                                        <th>Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($responden as $item)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>
+                                                <a href="{{ route('kuesioner.edit', $item->id) }}" class="btn btn-warning">
+                                                    <i class="ti ti-pencil"></i> Edit Responden
+                                                </a>
+                                                <form action="{{ route('responden.delete', $item->id) }}" method="post"
+                                                    class="d-inline">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                                                        <i class="ti ti-trash"></i> Hapus Responden
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

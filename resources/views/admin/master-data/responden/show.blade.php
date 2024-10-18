@@ -77,11 +77,11 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($responden->question as $item => $value)
+                                    @foreach ($kuesioner as $item)
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->question->count() }}</td>
+                                            <td>{{ $item->questions->count() }}</td>
                                             <td>Babi</td>
                                         </tr>
                                     @endforeach

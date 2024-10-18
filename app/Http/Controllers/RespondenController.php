@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Responden, Kuesioner, AnswerResponden};
+use App\Models\{Responden, Kuesioner, RespondenKuesioner};
 use Illuminate\Http\Request;
 
 class RespondenController extends Controller
@@ -69,10 +69,9 @@ class RespondenController extends Controller
         $active = 'responden';
         $subtitle = 'Detail Responden';
         $responden = Responden::findOrFail($id);
-        $question = $responden->question();
-        $kuesioner = $question->kuesioner;
-
-        dd($kuesioner);
+        $kuesioner = Kuesioner::with('respondenKuesioners')->whereHas('respondenKuesioners', function($query){
+            $query->where('answer', '!=', null);
+        })->get();
         return view('admin.master-data.responden.show', compact('responden', 'title', 'active', 'subtitle', 'responden','kuesioner'));
     }
 
@@ -140,23 +139,25 @@ class RespondenController extends Controller
         $title = 'Data Responden';
         $subtitle = 'Respon Kuesioner';
         $responden = Responden::findOrFail($id);
-        $kuesioner = Kuesioner::all();
+        $kuesioner = Kuesioner::where('isActive', 1)->get();
         return view('admin.master-data.responden.respond_kuesioner', compact('responden', 'kuesioner', 'title', 'subtitle'));
     }
 
     public function respond(Request $request)
     {
         $responden = Responden::findOrFail($request['responden_id']);
-        $responden->kuesioner()->attach($request['kuesioner_id']);
-        // dump($responden->answers());
-        foreach ($request->input('answers') as $item => $value) {
-            $checkAnswer = $responden->question->where('question_id', $item)->first();
-            if ($checkAnswer) {
-                $responden->question->updateExistingPivot($item, ['answer' => $value]);
-            }else{
-                $responden->question()->attach($item, ['answer' => $value]);
-            }
+        $data = [];
+        foreach ($request['answers'] as $questionId => $answer) {
+            $data[] = [
+                'responden_id' => $request['responden_id'],
+                'kuesioner_id' => $request['kuesioner_id'],
+                'question_id' => $questionId,
+                'answer' => $answer,
+            ];
         }
-        return redirect()->route('responden.index')->with('success', 'Berhasil menyimpan jawaban');
+
+        RespondenKuesioner::insert($data);
+
+        return redirect()->route('responden.index')->with('success', 'Berhasil menambahkan data');
     }
 }

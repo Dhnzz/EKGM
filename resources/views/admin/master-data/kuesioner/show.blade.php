@@ -62,7 +62,7 @@
                             <hr class="divider">
                             <h5>Pertanyaan :</h5>
                             <ol>
-                                @foreach ($data->question as $item)
+                                @foreach ($data->questions as $item)
                                     <li>
                                         {{$item->question}}
                                     </li>

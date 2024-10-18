@@ -30,8 +30,8 @@
                             <select name="kuesioner_id" id="kuesionerSelect" class="form-control">
                                 <option value="">Pilih Kuesioner</option>
                                 @foreach ($kuesioner as $item)
-                                    <option value="{{ $item->id }}" data-questions="{{ $item->question }}">
-                                        {{ $item->name }} - Jumlah Pertanyaan: {{ $item->question->count() }}
+                                    <option value="{{ $item->id }}" data-questions="{{ $item->questions }}">
+                                        {{ $item->name }} - Jumlah Pertanyaan: {{ $item->questions->count() }}
                                     </option>
                                 @endforeach
                             </select>

@@ -37,7 +37,7 @@ Route::prefix('dashboard')->group(function(){
         Route::put('/update/{id}', [KuesionerController::class, 'update'])->name('kuesioner.update');
         Route::delete('/delete/{id}', [KuesionerController::class, 'destroy'])->name('kuesioner.delete');
         Route::put('/status_change/{id}', [KuesionerController::class, 'status_change'])->name('kuesioner.status_change');
-        Route::put('/show_responden/{id}', [KuesionerController::class, 'show_responden'])->name('kuesioner.show_responden');
+        Route::get('/show_responden/{id}', [KuesionerController::class, 'show_responden'])->name('kuesioner.show_responden');
     });
 
     Route::prefix('article')->group(function(){
