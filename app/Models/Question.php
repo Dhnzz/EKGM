@@ -20,9 +20,4 @@ class Question extends Model
     {
         return $this->belongsTo(Kuesioner::class);
     }
-
-    public function responden(): BelongsToMany
-    {
-        return $this->belongsToMany(Responden::class, 'answer_respondens')->withPivot('answer');
-    }
 }

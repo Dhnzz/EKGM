@@ -147,6 +147,8 @@ class RespondenController extends Controller
     public function respond(Request $request)
     {
         $responden = Responden::findOrFail($request['responden_id']);
+        $responden->kuesioner()->attach($request['kuesioner_id']);
+        // dump($responden->answers());
         foreach ($request->input('answers') as $item => $value) {
             $checkAnswer = $responden->question->where('question_id', $item)->first();
             if ($checkAnswer) {
