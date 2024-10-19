@@ -12,7 +12,7 @@ class KuesionerController extends Controller
      */
     public function index()
     {
-        $title = 'Data Kuesioner';
+        $title = 'Kuesioner';
         $active = 'kuesioner';
         $kuesioner_data = Kuesioner::all();
         return view('admin.master-data.kuesioner.index', compact('kuesioner_data', 'title', 'active'));
@@ -23,7 +23,7 @@ class KuesionerController extends Controller
      */
     public function create()
     {
-        $title = 'Data Kuesioner';
+        $title = 'Kuesioner';
         $active = 'kuesioner';
         $subtitle = 'Tambah Kuesioner';
         return view('admin.master-data.kuesioner.create', compact('subtitle', 'title', 'active'));
@@ -58,7 +58,7 @@ class KuesionerController extends Controller
      */
     public function show($id)
     {
-        $title = 'Data Kuesioner';
+        $title = 'Kuesioner';
         $active = 'kuesioner';
         $subtitle = 'Detail Kuesioner';
         $data = Kuesioner::find($id);
@@ -92,7 +92,7 @@ class KuesionerController extends Controller
     {
         $data = Kuesioner::findOrFail($id);
         $active = 'kuesioner';
-        $title = 'Data Kuesioner';
+        $title = 'Kuesioner';
         $subtitle = 'Edit Kuesioner';
         return view('admin.master-data.kuesioner.edit', compact('subtitle', 'title', 'data', 'active'));
     }
@@ -142,7 +142,7 @@ class KuesionerController extends Controller
 
     public function show_responden($id)
     {
-        $title = 'Data Kuesioner';
+        $title = 'Kuesioner';
         $active = 'kuesioner';
         $subtitle = 'Detail Respons';
         $data = Kuesioner::find($id);

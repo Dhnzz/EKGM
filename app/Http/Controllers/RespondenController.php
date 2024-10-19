@@ -12,9 +12,10 @@ class RespondenController extends Controller
      */
     public function index()
     {
-        $active = 'Responden';
+        $title = 'Responden';
+        $active = 'responden';
         $responden = Responden::all();
-        return view('admin.master-data.responden.index', compact('active', 'responden'));
+        return view('admin.master-data.responden.index', compact('active', 'responden','title'));
     }
 
     /**
@@ -65,7 +66,7 @@ class RespondenController extends Controller
      */
     public function show($id)
     {
-        $title = 'Data Responden';
+        $title = 'Responden';
         $active = 'responden';
         $subtitle = 'Detail Responden';
         $responden = Responden::findOrFail($id);
@@ -80,7 +81,7 @@ class RespondenController extends Controller
      */
     public function edit($id)
     {
-        $title = 'Data Responden';
+        $title = 'Responden';
         $subtitle = 'Edit Responden';
         $responden = Responden::findOrFail($id);
         return view('admin.master-data.responden.edit', compact('title', 'subtitle', 'responden'));
@@ -136,7 +137,7 @@ class RespondenController extends Controller
 
     public function respond_kuesioner($id)
     {
-        $title = 'Data Responden';
+        $title = 'Responden';
         $subtitle = 'Respon Kuesioner';
         $responden = Responden::findOrFail($id);
         $kuesioner = Kuesioner::where('isActive', 1)->get();

@@ -13,7 +13,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $title = 'Data Artikel';
+        $title = 'Artikel';
         $active = 'artikel';
         $article_data = Article::all();
         return view('admin.master-data.article.index', compact('article_data', 'title', 'active'));
@@ -24,7 +24,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $title = 'Data Atikel';
+        $title = 'Atikel';
         $active = 'artikel';
         $subtitle = 'Tambah Artikel';
         return view('admin.master-data.article.create', compact('subtitle', 'title', 'active'));
@@ -72,7 +72,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $title = 'Data Artikel';
+        $title = 'Artikel';
         $active = 'artikel';
         $subtitle = 'Detail Artikel';
         $article = Article::findOrFail($id);
@@ -84,9 +84,9 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        $title = 'Data Artikel';
+        $title = 'Artikel';
         $active = 'artikel';
-        $subtitle = 'Detail Artikel';
+        $subtitle = 'Edit Artikel';
         $article = Article::findOrFail($id);
 
         if ($article) {

@@ -34,7 +34,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link {{(request()->routeIs('responden*') ? 'active' : '')}}" href="{{ route('responden.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-layout-dashboard"></i>
+                            <i class="ti ti-user"></i>
                         </span>
                         <span class="hide-menu">Responden</span>
                     </a>
@@ -42,7 +42,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link {{(request()->routeIs('kuesioner*') ? 'active' : '')}}" href="{{ route('kuesioner.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-layout-dashboard"></i>
+                            <i class="ti ti-clipboard"></i>
                         </span>
                         <span class="hide-menu">Kuesioner</span>
                     </a>
@@ -50,7 +50,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link {{(request()->routeIs('article*') ? 'active' : '')}}" href="{{ route('article.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-layout-dashboard"></i>
+                            <i class="ti ti-article"></i>
                         </span>
                         <span class="hide-menu">Artikel</span>
                     </a>
