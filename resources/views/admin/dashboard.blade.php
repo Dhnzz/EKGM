@@ -12,17 +12,16 @@
             <div class="card border-0 zoom-in bg-light-primary shadow-none">
                 <div class="card-body">
                     <div class="text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-box mb-3 text-primary"
-                            width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5"></path>
-                            <path d="M12 12l8 -4.5"></path>
-                            <path d="M12 12l0 9"></path>
-                            <path d="M12 12l-8 -4.5"></path>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
+                            class="icon icon-tabler icon-tabler-box mb-3 text-primary" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-user">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                         </svg>
-                        <p class="fw-semibold fs-3 text-primary mb-1"> Product </p>
-                        <h5 class="fw-semibold text-primary mb-0">{{ $count_catalog ?? 0 }}</h5>
+                        <p class="fw-semibold fs-3 text-primary mb-1"> Responden </p>
+                        <h5 class="fw-semibold text-primary mb-0">{{ $countResponden ?? 0 }}</h5>
                     </div>
                 </div>
             </div>
@@ -31,18 +30,16 @@
             <div class="card border-0 zoom-in bg-light-warning shadow-none">
                 <div class="card-body">
                     <div class="text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-category-2 mb-3 text-warning" width="50" height="50"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M14 4h6v6h-6z"></path>
-                            <path d="M4 14h6v6h-6z"></path>
-                            <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-                            <path d="M7 7m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
+                            class="icon icon-tabler icon-tabler-box mb-3 text-warning" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+                            <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
                         </svg>
-                        <p class="fw-semibold fs-3 text-warning mb-1"> Category </p>
-                        <h5 class="fw-semibold text-warning mb-0">{{ $count_category ?? 0 }}</h5>
+                        <p class="fw-semibold fs-3 text-warning mb-1"> Kuesioner </p>
+                        <h5 class="fw-semibold text-warning mb-0">{{ $countKuesioner ?? 0 }}</h5>
                     </div>
                 </div>
             </div>
@@ -51,38 +48,18 @@
             <div class="card border-0 zoom-in bg-light-danger shadow-none">
                 <div class="card-body">
                     <div class="text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-brand-youtube mb-3 text-danger" width="50"
-                            height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8z"></path>
-                            <path d="M10 9l5 3l-5 3z"></path>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
+                            class="icon icon-tabler icon-tabler-box mb-3 text-danger" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-article">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                            <path d="M7 8h10" />
+                            <path d="M7 12h10" />
+                            <path d="M7 16h10" />
                         </svg>
-                        <p class="fw-semibold fs-3 text-danger mb-1"> Video </p>
-                        <h5 class="fw-semibold text-danger mb-0">{{ $count_video ?? 0 }}</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="card border-0 zoom-in bg-light-secondary shadow-none">
-                <div class="card-body">
-                    <div class="text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-news mb-3 text-secondary" width="50" height="50"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path
-                                d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11">
-                            </path>
-                            <path d="M8 8l4 0"></path>
-                            <path d="M8 12l4 0"></path>
-                            <path d="M8 16l4 0"></path>
-                        </svg>
-                        <p class="fw-semibold fs-3 text-secondary mb-1"> Information </p>
-                        <h5 class="fw-semibold text-secondary mb-0">{{ $count_information ?? 0 }}</h5>
+                        <p class="fw-semibold fs-3 text-danger mb-1"> Artikel </p>
+                        <h5 class="fw-semibold text-danger mb-0">{{ $countArticle ?? 0 }}</h5>
                     </div>
                 </div>
             </div>
@@ -96,15 +73,39 @@
                     <div class="position-relative">
                         <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
                             <div class="mb-3 mb-sm-0">
-                                <h5 class="card-title fw-semibold">Latest Products</h5>
-                                <p class="card-subtitle mb-0">Five latest products</p>
+                                <h5 class="card-title fw-semibold">Kuesioner Terakhir</h5>
+                                <p class="card-subtitle mb-0">Lima kuesioner terakhir</p>
                             </div>
                             <div>
-                                <a href="" class="btn btn-sm btn-light-primary">See More</a>
+                                <a href="{{route('kuesioner.index')}}" class="btn btn-sm btn-light-primary">Lihat selengkapnya</a>
                             </div>
                         </div>
                         <div>
-
+                            @if (count($latest_kuesioner) > 0)
+                                @foreach ($latest_kuesioner as $item)
+                                    <div class="d-flex align-items-center pb-2">
+                                        <div class="d-flex align-items-center justify-content-between w-100">
+                                            <div>
+                                                <h5 class="fw-semibold fs-4 mb-2"> {{ $item->name }} </h5>
+                                                Jumlah Pertanyaan : {{ $item->questions->count() }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="alert alert-warning mb-0" role="alert">
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <span
+                                            class="rounded-circle px-1 py-0 border border-2 border-warning text-light bg-warning mb-0 d-block"
+                                            style="font-size: 16px;">
+                                            <i class="ti ti-alert-circle"></i>
+                                        </span>
+                                        <p class="mb-0">
+                                            Belum ada kuesioner. <a href="{{ route('kuesioner.create') }}">Add</a> now.
+                                        </p>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -116,22 +117,49 @@
                     <div class="position-relative">
                         <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
                             <div class="mb-3 mb-sm-0">
-                                <h5 class="card-title fw-semibold mb-0">Latest Video</h5>
+                                <h5 class="card-title fw-semibold mb-0">Artikel terakhir</h5>
                             </div>
                             <div>
-                                <a href="" class="btn btn-sm btn-light-primary">See More</a>
+                                <a href="{{route('article.index')}}" class="btn btn-sm btn-light-primary">Lihat selengkapnya</a>
                             </div>
                         </div>
                         <div>
-
+                            @if (count($latest_article) > 0)
+                                @foreach ($latest_article as $item)
+                                    <div class="d-flex align-items-center pb-2">
+                                        <div class="me-3 pe-1">
+                                            <img src="{{ asset('uploads/article/image/' . $item->cover) }}"
+                                                class="shadow-warning rounded-2" alt="" width="72"
+                                                height="72" style="object-fit: cover;" />
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between w-100">
+                                            <div>
+                                                <h5 class="fw-semibold fs-4 mb-2"> {{ $item->title }} </h5>
+                                                <p>{{ Str::limit($item->content, 30) }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="alert alert-warning mb-0" role="alert">
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <span
+                                            class="rounded-circle px-1 py-0 border border-2 border-warning text-light bg-warning mb-0 d-block"
+                                            style="font-size: 16px;">
+                                            <i class="ti ti-alert-circle"></i>
+                                        </span>
+                                        <p class="mb-0">
+                                            Belum ada artikel. <a href="{{ route('article.create') }}">Add</a> now.
+                                        </p>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 @endsection
 
 @push('scripts')
