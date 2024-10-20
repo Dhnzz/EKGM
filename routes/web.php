@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{DashboardController, RespondenController, KuesionerController, ArticleController};
+use App\Http\Controllers\{DashboardController, RespondenController, KuesionerController, ArticleController, CategoryController};
 
 Route::get('/', function () {
     return view('welcome');
@@ -49,5 +49,15 @@ Route::prefix('dashboard')->group(function(){
         Route::put('/update/{id}', [ArticleController::class, 'update'])->name('article.update');
         Route::delete('/delete/{id}', [ArticleController::class, 'destroy'])->name('article.delete');
         Route::put('/status_change/{id}', [ArticleController::class, 'status_change'])->name('article.status_change');
+    });
+
+    Route::prefix('category')->group(function(){
+        Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+        Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+        Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
+        Route::get('/show/{id}', [CategoryController::class, 'show'])->name('category.show');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::put('/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+        Route::delete('/delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
     });
 });

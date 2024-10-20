@@ -2,7 +2,7 @@
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="{{route('dashboard')}}" class="text-nowrap">
+            <a href="{{ route('dashboard') }}" class="text-nowrap">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/front/img/favicon.png') }}" width="50">
                     <h4 class="mb-0 px-2 fw-bolder">ADMIN PANEL</h4>
@@ -20,7 +20,8 @@
                     <span class="hide-menu">Home</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{(request()->routeIs('dashboard') ? 'active' : '')}}" href="{{ route('dashboard') }}" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                        href="{{ route('dashboard') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-layout-dashboard"></i>
                         </span>
@@ -32,7 +33,8 @@
                     <span class="hide-menu">Master</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{(request()->routeIs('responden*') ? 'active' : '')}}" href="{{ route('responden.index') }}" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->routeIs('responden*') ? 'active' : '' }}"
+                        href="{{ route('responden.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-user"></i>
                         </span>
@@ -40,7 +42,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{(request()->routeIs('kuesioner*') ? 'active' : '')}}" href="{{ route('kuesioner.index') }}" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->routeIs('kuesioner*') ? 'active' : '' }}"
+                        href="{{ route('kuesioner.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-clipboard"></i>
                         </span>
@@ -48,11 +51,21 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{(request()->routeIs('article*') ? 'active' : '')}}" href="{{ route('article.index') }}" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->routeIs('article*') ? 'active' : '' }}"
+                        href="{{ route('article.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-article"></i>
                         </span>
                         <span class="hide-menu">Artikel</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ request()->routeIs('category*') ? 'active' : '' }}"
+                        href="{{ route('category.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-category"></i>
+                        </span>
+                        <span class="hide-menu">Category</span>
                     </a>
                 </li>
             </ul>
