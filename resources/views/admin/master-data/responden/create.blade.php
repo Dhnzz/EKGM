@@ -35,10 +35,10 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="control-label mb-1">Email Responden <span class="text-danger">*</span></label>
-                            <input type="text" name="email" class="form-control @error('email') is-invalid @enderror"
-                                placeholder="..." value="{{ old('email') }}" />
-                            @error('email')
+                            <label class="control-label mb-1">Nomot Telepon Responden <span class="text-danger">*</span></label>
+                            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror"
+                                placeholder="..." value="{{ old('phone') }}" />
+                            @error('phone')
                                 <small class="invalid-feedback">
                                     {{ $message }}
                                 </small>

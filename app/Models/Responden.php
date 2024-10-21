@@ -11,7 +11,7 @@ use App\Models\ResponKuesioner;
 class Responden extends Model
 {
     use HasFactory;
-    protected $fillable = ['email', 'name', 'birth_date'];
+    protected $fillable = ['phone', 'name', 'birth_date'];
 
     public function kuesioner(): HasMany
     {

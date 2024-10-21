@@ -36,14 +36,13 @@ class RespondenController extends Controller
         $request->validate(
             [
                 'name' => 'required',
-                'email' => 'required|email|unique:respondens,email',
+                'phone' => 'required|unique:respondens,phone',
                 'birth_date' => 'date|required',
             ],
             [
                 'name.required' => 'Harap isi kolom nama',
-                'email.required' => 'Harap isi kolom email',
-                'email.email' => 'Harap menggunakan format email seperti: pengguna@example.com',
-                'email.unique' => 'Email sudah terdaftar',
+                'phone.required' => 'Harap isi kolom nomor telepon',
+                'phone.unique' => 'Nomor telepon sudah terdaftar',
                 'birth_date.required' => 'Harap isi kolom tanggal lahir',
                 'birth_date.date' => 'Harap menggunakan format tanggal yang benar',
             ],
@@ -51,7 +50,7 @@ class RespondenController extends Controller
 
         $responden = Responden::create([
             'name' => $request['name'],
-            'email' => $request['email'],
+            'phone' => $request['phone'],
             'birth_date' => $request['birth_date'],
         ]);
         if ($responden) {
@@ -95,13 +94,12 @@ class RespondenController extends Controller
         $request->validate(
             [
                 'name' => 'required',
-                'email' => 'required|email',
+                'phone' => 'required',
                 'birth_date' => 'date|required',
             ],
             [
                 'name.required' => 'Harap isi kolom nama',
-                'email.required' => 'Harap isi kolom email',
-                'email.email' => 'Harap menggunakan format email seperti: pengguna@example.com',
+                'email.required' => 'Harap isi kolom nomor telepon',
                 'birth_date.required' => 'Harap isi kolom tanggal lahir',
                 'birth_date.date' => 'Harap menggunakan format tanggal yang benar',
             ],
@@ -110,7 +108,7 @@ class RespondenController extends Controller
 
         $respondenUpdate = $responden->update([
             'name' => $request['name'],
-            'email' => $request['email'],
+            'phone' => $request['phone'],
             'birth_date' => $request['birth_date'],
         ]);
 

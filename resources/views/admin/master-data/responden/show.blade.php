@@ -58,8 +58,8 @@
 
                             <h5>Nama :</h5>
                             <h3 class="fw-semibold">{{ $responden->name ?? '' }}</h3>
-                            <h5 class="mt-4">Email :</h5>
-                            <h3 class="fw-semibold">{{ $responden->email ?? '' }}</h3>
+                            <h5 class="mt-4">Nomor Telepon :</h5>
+                            <h3 class="fw-semibold">{{ $responden->phone ?? '' }}</h3>
                             <p>Tanggal lahir : <span class="fw-bolder">{{ $responden->birth_date }}</span></p>
 
                             <hr class="divider">
