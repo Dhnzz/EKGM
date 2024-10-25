@@ -58,6 +58,7 @@ class ArticleController extends Controller
             'title' => $request['title'],
             'content' => $request['content'],
             'cover' => $imageName,
+            'videoUrl' => $request['videoUrl']
         ]);
 
         if ($article) {
@@ -129,11 +130,13 @@ class ArticleController extends Controller
                 'title' => $request['title'],
                 'content' => $request['content'],
                 'cover' => $imageName,
+                'videoUrl' => $request['videoUrl']
             ]);
         } else {
             $articleUpdate = $article->update([
                 'title' => $request['title'],
                 'content' => $request['content'],
+                'videoUrl' => $request['videoUrl']
             ]);
         }
         if ($article) {

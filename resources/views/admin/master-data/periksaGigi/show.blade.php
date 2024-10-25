@@ -2,8 +2,8 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
 
     <style>
         #sync1 .btn-nav-dark {
@@ -38,7 +38,7 @@
                         <a href="{{ route('dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('kuesioner.index') }}" class="text-muted">{{ $title ?? '' }}</a>
+                        <a href="{{ route('responden.index') }}" class="text-muted">{{ $title ?? '' }}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">{{ $subtitle ?? '' }}</li>
                 </ol>
@@ -49,40 +49,36 @@
     <div class="shop-detail">
         <div class="card shadow-none border">
             <div class="card-body p-4">
-                <a href="{{ route('kuesioner.index') }}" class="btn btn-sm btn-dark mb-3"><i class="ti ti-arrow-left"></i>
-                    Kembali ke {{ $title ?? '' }}</a>
+                <a href="{{ route('responden.index') }}" class="btn btn-sm btn-dark mb-3"><i class="ti ti-arrow-left"></i> Kembali ke {{ $title ?? '' }}</a>
 
                 <div class="row g-4">
                     <div class="col-12">
                         <div class="shop-content">
 
-                            <h5>Nama Kuesioner :</h5>
-                            <h3 class="fw-semibold">{{ $data->name ?? '' }}</h3>
-                            <p>Dibuat tanggal : <span class="fw-bolder">{{ $data->created_at }}</span></p>
+                            <div class="d-flex justify-content-center">
+                                <img src="{{ asset('uploads/periksaGigi/image/'.$periksaGigi->image) }}" width="500px" alt="">
+                            </div>
+
+                            <p>Tanggal Pemeriksaan : {{ $periksaGigi->created_at ?? '' }}</p>
 
                             <hr class="divider">
-                            <h5>Kuesioner yang diisi :</h5>
-                            <table id="dataTable" class="table table-sm table-bordered" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Responden</th>
-                                        <th>Nomor Telepon</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $no = 1;
-                                    @endphp
-                                    @foreach ($responden as $item)
-                                        <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->phone }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                            <h5>Hasil Pemeriksaan :</h5>
+                            <p>{{ $periksaGigi->result }}</p>
+                            <div class="mt-3">
+                                <a href="{{ route('periksaGigi.edit', $periksaGigi->id) }}"
+                                    class="btn btn-warning">
+                                    <i class="ti ti-pencil"></i> Edit Pemeriksaan
+                                </a>
+                                <form action="{{ route('periksaGigi.delete', $periksaGigi->id) }}"
+                                    method="post" class="d-inline">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure?')">
+                                        <i class="ti ti-trash"></i> Hapus Pemeriksaan
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

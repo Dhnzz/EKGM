@@ -61,9 +61,10 @@
 
                             <h5>Judul Artikel :</h5>
                             <h3 class="fw-semibold">{{ $article->title ?? '' }}</h3>
-                            <p>Dibuat tanggal : <span class="fw-bolder">{{$article->created_at}}</span></p>
+                            <p>Dibuat tanggal : {{ $article->created_at ?? '' }}</p>
 
                             <hr class="divider">
+                            <p>URL Video : <a href="{{$article->videoUrl}}"><span class="fw-bolder">{{$article->videoUrl}}</span></a></p>
                             <h5>Isi Konten :</h5>
                             <p>{{ $article->content }}</p>
                             <div class="mt-3">

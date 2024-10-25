@@ -23,7 +23,7 @@ class RespondenKuesioner extends Model
 
     public function kuesioner(): BelongsTo
     {
-        return $this->belongsTo(Responden::class);
+        return $this->belongsTo(Kuesioner::class);
     }
 
     public function question(): BelongsTo

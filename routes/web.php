@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{DashboardController, RespondenController, KuesionerController, ArticleController, CategoryController};
+use App\Http\Controllers\{DashboardController, RespondenController, KuesionerController, ArticleController, CategoryController, TodoController, PeriksaGigiController};
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +26,10 @@ Route::prefix('dashboard')->group(function(){
         Route::delete('/delete/{id}', [RespondenController::class, 'destroy'])->name('responden.delete');
         Route::get('/respond_kuesioner/{id}', [RespondenController::class, 'respond_kuesioner'])->name('responden.respond_kuesioner');
         Route::post('/respond/{id}', [RespondenController::class, 'respond'])->name('responden.respond');
+        Route::get('/edit_respond/{id}', [RespondenController::class, 'edit_respond'])->name('responden.edit_respond');
+        Route::put('/update_respond/{id}', [RespondenController::class, 'update_respond'])->name('responden.update_respond');
+        Route::delete('/destroy_respond/{id}', [RespondenController::class, 'destroy_respond'])->name('responden.destroy_respond');
+        Route::get('/show_detail_kuesioner/{id}', [RespondenController::class, 'show_detail_kuesioner'])->name('responden.show_detail_kuesioner');
     });
 
     Route::prefix('kuesioner')->group(function(){
@@ -59,5 +63,23 @@ Route::prefix('dashboard')->group(function(){
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
         Route::put('/update/{id}', [CategoryController::class, 'update'])->name('category.update');
         Route::delete('/delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
+    });
+
+    Route::prefix('todo')->group(function(){
+        Route::get('/create/{id}', [TodoController::class, 'create'])->name('todo.create');
+        Route::post('/store/{id}', [TodoController::class, 'store'])->name('todo.store');
+        Route::get('/show/{id}', [TodoController::class, 'show'])->name('todo.show');
+        Route::get('/edit/{id}', [TodoController::class, 'edit'])->name('todo.edit');
+        Route::put('/update/{id}', [TodoController::class, 'update'])->name('todo.update');
+        Route::delete('/delete/{id}', [TodoController::class, 'destroy'])->name('todo.delete');
+    });
+
+    Route::prefix('periksaGigi')->group(function(){
+        Route::get('/create/{id}', [PeriksaGigiController::class, 'create'])->name('periksaGigi.create');
+        Route::post('/store/{id}', [PeriksaGigiController::class, 'store'])->name('periksaGigi.store');
+        Route::get('/show/{id}', [PeriksaGigiController::class, 'show'])->name('periksaGigi.show');
+        Route::get('/edit/{id}', [PeriksaGigiController::class, 'edit'])->name('periksaGigi.edit');
+        Route::put('/update/{id}', [PeriksaGigiController::class, 'update'])->name('periksaGigi.update');
+        Route::delete('/delete/{id}', [PeriksaGigiController::class, 'destroy'])->name('periksaGigi.delete');
     });
 });

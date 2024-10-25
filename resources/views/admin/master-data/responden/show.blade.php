@@ -67,10 +67,10 @@
                             <table id="dataTable" class="table table-sm table-bordered" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Nama Kuesioner</th>
-                                        <th>Jumlah Pertanyaan</th>
-                                        <th>Opsi</th>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Nama Kuesioner</th>
+                                        <th class="text-center">Jumlah Pertanyaan</th>
+                                        <th class="text-center">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,24 +82,67 @@
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->questions->count() }}</td>
-                                            <td>Babi</td>
+                                            <td class="text-center"><a
+                                                    href="{{ route('responden.show_detail_kuesioner', $item->id) }}"
+                                                    class="btn btn-sm btn-primary">Detail</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="mt-3">
-                                <a href="{{ route('responden.edit', $responden->id) }}" class="btn btn-warning">
-                                    <i class="ti ti-pencil"></i> Edit Responden
-                                </a>
-                                <form action="{{ route('responden.delete', $responden->id) }}" method="post"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
-                                        <i class="ti ti-trash"></i> Hapus Responden
-                                    </button>
-                                </form>
-                            </div>
+                            <hr class="divider">
+                            <h5>Todo :</h5>
+                            <table id="dataTable2" class="table table-sm table-bordered" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Tanggal</th>
+                                        <th class="text-center">Kategori</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($todo as $item)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ $item->date }}</td>
+                                            <td>{{ $item->category->name }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <hr class="divider">
+                            <h5>Pemeriksaan Gigi :</h5>
+                            <table id="dataTable3" class="table table-sm table-bordered" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Gambar</th>
+                                        <th class="text-center">Tanggal</th>
+                                        <th class="text-center">Hasil</th>
+                                        <th class="text-center">Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($periksaGigi as $item)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td class="text-center"><img
+                                                    src="{{ asset('uploads/periksaGigi/image/' . $item->image) }}"
+                                                    width="100px" alt=""></td>
+                                            <td>{{ $item->date }}</td>
+                                            <td>{{ $item->result }}</td>
+                                            <td class="text-center align-middle">
+                                                <a href="{{ route('periksaGigi.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -136,5 +179,7 @@
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
     <script>
         new DataTable('#dataTable');
+        new DataTable('#dataTable2');
+        new DataTable('#dataTable3');
     </script>
 @endpush

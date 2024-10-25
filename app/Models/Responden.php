@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\{HasMany};
+use Illuminate\Database\Eloquent\Relations\{HasMany, BelongsToMany, HasOne};
 
 use App\Models\ResponKuesioner;
 
@@ -17,4 +17,15 @@ class Responden extends Model
     {
         return $this->hasMany(RespondenKuesioner::class);
     }
+
+    public function todo(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'todos');
+    }
+
+    public function periksaGigi(): HasOne
+    {
+        return $this->hasOne(PeriksaGigi::class, 'todos');
+    }
+
 }

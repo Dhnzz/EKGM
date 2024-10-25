@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Responden, Kuesioner, RespondenKuesioner};
+use App\Models\{Responden, Kuesioner, RespondenKuesioner, Todo, PeriksaGigi};
 use Illuminate\Http\Request;
 
 class RespondenController extends Controller
@@ -15,7 +15,7 @@ class RespondenController extends Controller
         $title = 'Responden';
         $active = 'responden';
         $responden = Responden::all();
-        return view('admin.master-data.responden.index', compact('active', 'responden','title'));
+        return view('admin.master-data.responden.index', compact('active', 'responden', 'title'));
     }
 
     /**
@@ -69,10 +69,14 @@ class RespondenController extends Controller
         $active = 'responden';
         $subtitle = 'Detail Responden';
         $responden = Responden::findOrFail($id);
-        $kuesioner = Kuesioner::with('respondenKuesioners')->whereHas('respondenKuesioners', function($query){
-            $query->where('answer', '!=', null);
-        })->get();
-        return view('admin.master-data.responden.show', compact('responden', 'title', 'active', 'subtitle', 'responden','kuesioner'));
+        $kuesioner = Kuesioner::with('respondenKuesioners')
+            ->whereHas('respondenKuesioners', function ($query) {
+                $query->where('answer', '!=', null);
+            })
+            ->get();
+        $todo = Todo::where('responden_id', '=', $id)->get();
+        $periksaGigi = PeriksaGigi::where('responden_id', '=', $id)->get();
+        return view('admin.master-data.responden.show', compact('responden', 'title', 'active', 'subtitle', 'responden', 'kuesioner', 'todo', 'periksaGigi'));
     }
 
     /**
@@ -158,5 +162,48 @@ class RespondenController extends Controller
         RespondenKuesioner::insert($data);
 
         return redirect()->route('responden.index')->with('success', 'Berhasil menambahkan data');
+    }
+
+    public function show_detail_kuesioner($id)
+    {
+        $title = 'Responden';
+        $subtitle = 'Detail Kuesioner';
+        $kuesioner = RespondenKuesioner::where('responden_id', '=', $id)->where('answer', '!=', null)->get();
+        return view('admin.master-data.responden.show_detail_kuesioner', compact('kuesioner', 'title', 'subtitle'));
+    }
+
+    public function edit_respond($id)
+    {
+        $title = 'Responden';
+        $subtitle = 'Edit Respons';
+        $kuesioner = RespondenKuesioner::where('responden_id', '=', $id)->where('answer', '!=', null)->get();
+        return view('admin.master-data.responden.edit_respond', compact('kuesioner', 'title', 'subtitle'));
+    }
+
+    public function update_respond(Request $request, $id)
+    {
+        // $responden = Responden::findOrFail($request)
+        foreach ($request['answers'] as $item => $value) {
+            $respond = RespondenKuesioner::findOrFail($item);
+            $respond->update([
+                'answer' => $value,
+            ]);
+        }
+
+        return redirect()
+            ->route('responden.show_detail_kuesioner', $respond->responden_id)
+            ->with('success', 'Berhasil mengubah jawaban');
+    }
+
+    public function destroy_respond($id)
+    {
+        $responden = RespondenKuesioner::where('responden_id', '=', $id)->get();
+        foreach ($responden as $item => $value) {
+            $respond = RespondenKuesioner::findOrFail($value->id);
+            $respond->delete();
+        }
+        return redirect()
+            ->route('responden.index', $respond->responden_id)
+            ->with('success', 'Berhasil mengubah jawaban');
     }
 }

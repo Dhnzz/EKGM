@@ -18,17 +18,17 @@
     </div>
 
     <div class="card">
-        <form action="{{ route('article.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('periksaGigi.store', $responden->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <h5 class="mb-3">{{ $subtitle }} Form</h5>
                 <div class="row">
                     <div class="col-12">
                         <div class="mb-3">
-                            <label class="control-label mb-1">Nama Artikel <span class="text-danger">*</span></label>
-                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                                placeholder="..." value="{{ old('title') }}" />
-                            @error('title')
+                            <label class="control-label mb-1">Tanggal <span class="text-danger">*</span></label>
+                            <input type="date" name="date" class="form-control @error('date') is-invalid @enderror"
+                                placeholder="..." value="{{ old('date') }}" />
+                            @error('date')
                                 <small class="invalid-feedback">
                                     {{ $message }}
                                 </small>
@@ -37,17 +37,17 @@
                         <div class="mb-3 d-flex flex-row gap-5 align-items-center" width="100">
                             <div class="card mb-0">
                                 <div class="card-body p-2">
-                                    <img id="cover-preview" src="{{ asset('uploads/article/image/default.jpg') }}"
+                                    <img id="cover-preview" src="{{ asset('uploads/periksaGigi/image/default.jpg') }}"
                                         width="200px" alt="">
                                 </div>
                             </div>
                             <div class="flex-fill">
-                                <label class="control-label mb-1">Cover Artikel<span class="text-danger">*</span></label>
+                                <label class="control-label mb-1">Foto Gigi<span class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <input type="file" name="cover" id="cover-input"
-                                        class="form-control @error('cover') is-invalid @enderror" placeholder="..." />
+                                    <input type="file" name="image" id="cover-input"
+                                        class="form-control @error('image') is-invalid @enderror" placeholder="..." />
                                 </div>
-                                @error('cover')
+                                @error('image')
                                     <small class="invalid-feedback">
                                         {{ $message }}
                                     </small>
@@ -65,22 +65,10 @@
                             });
                         </script>
                         <div class="mb-3">
-                            <label class="control-label mb-1">URL Video</label>
-                            <input type="text" name="videoUrl" class="form-control @error('videoUrl') is-invalid @enderror"
-                                placeholder="..." value="{{ old('videoUrl') }}" />
-                            @error('videoUrl')
-                                <small class="invalid-feedback">
-                                    {{ $message }}
-                                </small>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="control-label mb-1">Isi konten<span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <textarea name="content" id="" cols="30" class="form-control @error('content') is-invalid @enderror"
-                                    rows="10">{{ old('content') }}</textarea>
-                            </div>
-                            @error('content')
+                            <label class="control-label mb-1">Hasil Klasifikasi</label>
+                            <input type="text" name="result" class="form-control @error('result') is-invalid @enderror"
+                                placeholder="..." value="{{ old('result') }}" />
+                            @error('result')
                                 <small class="invalid-feedback">
                                     {{ $message }}
                                 </small>
