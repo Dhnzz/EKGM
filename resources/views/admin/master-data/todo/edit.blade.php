@@ -38,7 +38,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="control-label mb-1">Nama Kategori<span class="text-danger">*</span></label>
-                            <select name="category_id[]" id="category_id" class="form-control" multiple>
+                            <select name="category_id[][id]" id="category_id" class="form-control" multiple>
                                 @foreach ($category as $ctg)
 
                                         <option value="{{ $ctg->id }}" @foreach ($todoCategory as $todoCtg) @if($ctg->id == $todoCtg->category_id) selected @endif @endforeach>{{ $ctg->name }}

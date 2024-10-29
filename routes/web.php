@@ -71,7 +71,7 @@ Route::prefix('dashboard')->group(function(){
         Route::get('/show/{id}', [TodoController::class, 'show'])->name('todo.show');
         Route::get('/edit/{id}', [TodoController::class, 'edit'])->name('todo.edit');
         Route::put('/update/{id}', [TodoController::class, 'update'])->name('todo.update');
-        Route::delete('/delete/{id}', [TodoController::class, 'destroy'])->name('todo.delete');
+        Route::delete('/delete/{id}', [TodoController::class, 'destroy'])->name('todo.destroy');
     });
 
     Route::prefix('periksaGigi')->group(function(){

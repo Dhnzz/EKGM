@@ -38,7 +38,7 @@
                             <label class="control-label mb-1">Nama Kategori<span class="text-danger">*</span></label>
                             <select name="category_id[]" id="category_id" class="form-control" multiple>
                                 @foreach ($category as $item)
-                                    <option value="{{ $item->id }}" class="text-light" selected>{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" class="text-light">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                             @error('name')

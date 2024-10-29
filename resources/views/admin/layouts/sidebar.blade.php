@@ -33,7 +33,7 @@
                     <span class="hide-menu">Master</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->routeIs('responden*') ? 'active' : '' }}"
+                    <a class="sidebar-link {{ request()->routeIs('responden*') || request()->routeIs('todo*')  ? 'active' : '' }}"
                         href="{{ route('responden.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-user"></i>

@@ -20,7 +20,7 @@ class TodoController extends Controller
      */
     public function create($id)
     {
-        $title = 'Todo';
+        $title = 'Responden';
         $active = 'todo';
         $subtitle = 'Tambah Todo';
         $category = Category::all();
@@ -69,21 +69,26 @@ class TodoController extends Controller
      */
     public function show(Todo $todo, $id)
     {
-        $title = 'Todo';
+        $title = 'Responden';
         $active = 'todo';
         $subtitle = 'Detail Todo';
         $todo = Todo::findOrFail($id);
-        $category = Category::all();
         $todoCategory = CategoryTodo::where('todo_id', '=', $todo->id)->get();
-        return view('admin.master-data.todo.edit', compact('title', 'active', 'subtitle', 'category', 'todo', 'todoCategory'));
+        return view('admin.master-data.todo.show', compact('title', 'active', 'subtitle', 'todo', 'todoCategory'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Todo $todo)
+    public function edit($id)
     {
-        //
+        $title = 'Responden';
+        $active = 'todo';
+        $subtitle = 'Edit Todo';
+        $todo = Todo::findOrFail($id);
+        $category = Category::all();
+        $todoCategory = CategoryTodo::where('todo_id', '=', $todo->id)->get();
+        return view('admin.master-data.todo.edit', compact('title', 'active', 'subtitle', 'category', 'todo', 'todoCategory'));
     }
 
     /**
@@ -96,32 +101,26 @@ class TodoController extends Controller
         //     'date' => $request['date'],
         // ]);
         if ($todo) {
-            $categoryIds = collect($request['category_id']);
-            $kuesioner->question()->whereNotIn('id', $questionIds)->delete();
-            foreach ($request['category_id'] as $item) {
-                if (isset($item)) {
-                    // $categoryTodo = $todo->question->where('id', $item['id'])->first();
-                    $categoryTodo = $todo->category->first();
-                    dump($categoryTodo);
-
-                    // $question->update([
-                    //     'question' => $item['question'],
-                    // ]);
-                } else {
-                    // Question::create([
-                    //     'kuesioner_id' => $kuesioner['id'],
-                    //     'question' => $item,
-                    // ]);
-                }
-            }
+            $categoryIds = collect($request['category_id'])
+                ->pluck('id')
+                ->filter();
+            $todo->category()->whereNotIn('category_id', $categoryIds)->detach();
+            $todo->category()->syncWithoutDetaching($categoryIds);
         }
+        return redirect()
+            ->route('responden.index')
+            ->with('success', 'Berhasil mengubah todo untuk responden ' . $todo->responden->name);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Todo $todo)
+    public function destroy($id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+        $todo->delete();
+        return redirect()
+            ->route('responden.index')
+            ->with('success', 'Berhasil menghapus todo untuk responden ' . $todo->responden->name);
     }
 }
