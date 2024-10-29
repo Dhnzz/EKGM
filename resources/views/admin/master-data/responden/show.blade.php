@@ -96,7 +96,7 @@
                                     <tr>
                                         <th class="text-center">No</th>
                                         <th class="text-center">Tanggal</th>
-                                        <th class="text-center">Kategori</th>
+                                        <th class="text-center">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -107,7 +107,9 @@
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $item->date }}</td>
-                                            <td>{{ $item->category->name }}</td>
+                                            <td class="text-center">
+                                                <a href="{{ route('todo.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

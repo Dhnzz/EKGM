@@ -12,7 +12,6 @@ class Todo extends Model
     protected $fillable = [
         'date',
         'responden_id',
-        'category_id'
     ];
 
     public function responden(): BelongsTo
@@ -20,9 +19,9 @@ class Todo extends Model
         return $this->belongsTo(Responden::class);
     }
 
-    public function category(): BelongsTo
+    public function category(): BelongsToMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class, 'category_todos');
     }
 
 }

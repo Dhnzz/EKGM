@@ -15,6 +15,6 @@ class Category extends Model
 
     public function todo(): BelongsToMany
     {
-        return $this->belongsToMany(Responden::class, 'todos');
+        return $this->belongsToMany(Todo::class, 'category_todos');
     }
 }

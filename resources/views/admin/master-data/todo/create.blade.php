@@ -9,7 +9,7 @@
                         <a href="{{ route('dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('kuesioner.index') }}" class="text-muted">{{ $title ?? '' }}</a>
+                        <a href="{{ route('responden.index') }}" class="text-muted">{{ $title ?? '' }}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">{{ $subtitle ?? '' }}</li>
                 </ol>
@@ -36,9 +36,9 @@
                         </div>
                         <div class="mb-3">
                             <label class="control-label mb-1">Nama Kategori<span class="text-danger">*</span></label>
-                            <select name="category_id[]" class="form-control" multiple>
+                            <select name="category_id[]" id="category_id" class="form-control" multiple>
                                 @foreach ($category as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" class="text-light" selected>{{ $item->name }}</option>
                                 @endforeach
                             </select>
                             @error('name')
@@ -68,7 +68,11 @@
 @endsection
 
 @push('scripts')
-$(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
-});
+<script>
+    $(document).ready(function() {
+        $('#category_id').select2({
+            theme: "classic"
+        });
+    });
+</script>
 @endpush

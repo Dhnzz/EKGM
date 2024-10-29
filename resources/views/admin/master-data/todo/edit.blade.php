@@ -9,7 +9,7 @@
                         <a href="{{ route('dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('kuesioner.index') }}" class="text-muted">{{ $title ?? '' }}</a>
+                        <a href="{{ route('responden.index') }}" class="text-muted">{{ $title ?? '' }}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">{{ $subtitle ?? '' }}</li>
                 </ol>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="card">
-        <form action="{{ route('category.update', $category->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('todo.update', $todo->id) }}" method="post" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="card-body">
@@ -26,9 +26,26 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="mb-3">
-                            <label class="control-label mb-1">Nama Kategori <span class="text-danger">*</span></label>
-                            <input type="text" name="name" value="{{$category->name}}" class="form-control @error('name') is-invalid @enderror"
-                                placeholder="..." value="{{ old('name') }}" />
+                            <label class="control-label mb-1">Tanggal<span class="text-danger">*</span></label>
+                            <input type="date" name="date" value="{{ $todo->date }}"
+                                class="form-control @error('date') is-invalid @enderror" placeholder="..."
+                                value="{{ old('date') }}" />
+                            @error('date')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Nama Kategori<span class="text-danger">*</span></label>
+                            <select name="category_id[]" id="category_id" class="form-control" multiple>
+                                @foreach ($category as $ctg)
+
+                                        <option value="{{ $ctg->id }}" @foreach ($todoCategory as $todoCtg) @if($ctg->id == $todoCtg->category_id) selected @endif @endforeach>{{ $ctg->name }}
+                                        </option>
+
+                                @endforeach
+                            </select>
                             @error('name')
                                 <small class="invalid-feedback">
                                     {{ $message }}
@@ -54,3 +71,13 @@
         </form>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#category_id').select2({
+                theme: "classic"
+            });
+        });
+    </script>
+@endpush

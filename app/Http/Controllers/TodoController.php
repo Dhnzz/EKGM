@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
-use App\Models\{Responden, Category};
+use App\Models\{Responden, Category, CategoryTodo};
 
 class TodoController extends Controller
 {
@@ -45,27 +45,37 @@ class TodoController extends Controller
             ],
         );
 
+        $todo = Todo::create([
+            'date' => $request['date'],
+            'responden_id' => $id,
+        ]);
+
         $data = [];
-        foreach ($request['category_id'] as $item) {
+        foreach ($request['category_id'] as $item => $value) {
             $data[] = [
-                'date' => $request['date'],
-                'responden_id' => $id,
-                'category_id' => $item
+                'todo_id' => $todo->id,
+                'category_id' => $value,
             ];
         }
 
-        $todo = Todo::insert($data);
-        if ($todo) {
-            return redirect()->route('responden.index')->with('success','Berhasil menambahkan Todo');
+        $categoryTodo = CategoryTodo::insert($data);
+        if ($categoryTodo) {
+            return redirect()->route('responden.index')->with('success', 'Berhasil menambahkan Todo');
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Todo $todo)
+    public function show(Todo $todo, $id)
     {
-        //
+        $title = 'Todo';
+        $active = 'todo';
+        $subtitle = 'Detail Todo';
+        $todo = Todo::findOrFail($id);
+        $category = Category::all();
+        $todoCategory = CategoryTodo::where('todo_id', '=', $todo->id)->get();
+        return view('admin.master-data.todo.edit', compact('title', 'active', 'subtitle', 'category', 'todo', 'todoCategory'));
     }
 
     /**
@@ -79,9 +89,32 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, $id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+        // $todo->update([
+        //     'date' => $request['date'],
+        // ]);
+        if ($todo) {
+            $categoryIds = collect($request['category_id']);
+            $kuesioner->question()->whereNotIn('id', $questionIds)->delete();
+            foreach ($request['category_id'] as $item) {
+                if (isset($item)) {
+                    // $categoryTodo = $todo->question->where('id', $item['id'])->first();
+                    $categoryTodo = $todo->category->first();
+                    dump($categoryTodo);
+
+                    // $question->update([
+                    //     'question' => $item['question'],
+                    // ]);
+                } else {
+                    // Question::create([
+                    //     'kuesioner_id' => $kuesioner['id'],
+                    //     'question' => $item,
+                    // ]);
+                }
+            }
+        }
     }
 
     /**
