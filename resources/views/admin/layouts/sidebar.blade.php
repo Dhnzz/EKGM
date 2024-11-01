@@ -4,8 +4,8 @@
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="{{ route('dashboard') }}" class="text-nowrap">
                 <div class="d-flex align-items-center">
-                    <img src="{{ asset('assets/front/img/favicon.png') }}" width="50">
-                    <h4 class="mb-0 px-2 fw-bolder">ADMIN PANEL</h4>
+                    <img src="{{ asset('assets/front/img/ekgm.png') }}" width="50">
+                    <h4 class="mb-0 px-2 fw-bolder">EKGM PANEL</h4>
                 </div>
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">

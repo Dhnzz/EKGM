@@ -61,6 +61,7 @@
             <tr>
                 <th class="text-center">No</th>
                 <th class="text-center">Nama</th>
+                <th class="text-center">Nomor Telepon</th>
                 <th class="text-center">Opsi</th>
             </tr>
         </thead>
@@ -72,6 +73,7 @@
                 <tr>
                     <td class="text-center">{{ $no++ }}</td>
                     <td>{{ $item->name }}</td>
+                    <td>{{ $item->no_hp }}</td>
                     <td class="text-center align-middle">
                         <a href="{{ route('responden.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
                         <a href="{{ route('responden.respond_kuesioner', $item->id) }}" class="btn btn-sm btn-success">Jawab

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        TETHUNA - ADMIN PANEL
+        EKGM - ADMIN PANEL
         @if (!empty($title))
             - {{ $title }}
         @endif
@@ -13,7 +13,7 @@
             - {{ $subtitle }}
         @endif
     </title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/front/img/favicon.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/front/img/ekgm.png') }}" />
 
     @stack('styles')
 
