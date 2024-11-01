@@ -40,12 +40,14 @@
                             onclick="addQuestionField()">Tambah
                             Pertanyaan</button>
                         <div class="questionContainer">
-                            @foreach ($data->question as $item)
+                            @foreach ($data->questions as $item)
                                 <div class="mb-3">
-                                    <label class="control-label mb-1">Pertanyaan 1<span class="text-danger">*</span></label>
+                                    <label class="control-label mb-1">Pertanyaan<span class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <input type="text" name="questions[{{$loop->index}}][id]" class="form-control" value="{{$item->id}}" placeholder="..." />
-                                        <input type="text" name="questions[{{$loop->index}}][question]" class="form-control" value="{{$item->question}}" placeholder="..." />
+                                        <input type="hidden" name="questions[{{ $loop->index }}][id]"
+                                            class="form-control" value="{{ $item->id }}" placeholder="..." />
+                                        <input type="text" name="questions[{{ $loop->index }}][question]"
+                                            class="form-control" value="{{ $item->question }}" placeholder="..." />
                                         <button type="button" class="btn btn-danger btn-sm"
                                             onclick="removeQuestionField(this)">Hapus</button>
                                     </div>
@@ -53,30 +55,31 @@
                             @endforeach
                         </div>
                         <script>
+                            let questionIndex = {{ count($data->questions) }};
+
                             function addQuestionField() {
                                 const questionField = document.createElement('div');
                                 questionField.classList.add('mb-3');
                                 // Menghitung jumlah pertanyaan yang ada saat ini
                                 const questionCount = document.querySelectorAll('.questionsContainer .mb-3').length + 1;
+
                                 questionField.innerHTML = `
-                                    <label class="control-label mb-1">Pertanyaan ${questionCount} <span class="text-danger">*</span></label>
+                                    <label class="control-label mb-1">Pertanyaan<span class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <input type="text" name="questions[]" class="form-control" placeholder="..." />
+                                        <input type="hidden" name="questions[${questionIndex}][id]" class="form-control" placeholder="..." />
+                                        <input type="text" name="questions[${questionIndex}][question]" class="form-control" placeholder="..." />
                                         <button type="button" class="btn btn-danger btn-sm" onclick="removeQuestionField(this)">Hapus</button>
                                     </div>
                                 `;
 
                                 // Menambahkan elemen baru di bawah elemen terakhir mb-3
-                                const lastElement = document.querySelector('.questionContainer .mb-3');
-                                if (lastElement) {
-                                    lastElement.insertAdjacentElement('afterend', questionField);
-                                } else {
-                                    // Jika tidak ada elemen mb-3, tambahkan ke parent
-                                    document.querySelector('.form-actions').before(questionField);
-                                }
+                                document.querySelector('.questionContainer').appendChild(questionField);
 
                                 // Memperbarui penomoran semua pertanyaan
                                 updateQuestionNumbers();
+
+                                // Tingkatkan indeks untuk pertanyaan berikutnya
+                                questionIndex++;
                             }
 
                             function removeQuestionField(element) {

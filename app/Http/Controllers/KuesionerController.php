@@ -112,10 +112,10 @@ class KuesionerController extends Controller
             $questionIds = collect($request['questions'])
                 ->pluck('id')
                 ->filter();
-            $kuesioner->question()->whereNotIn('id', $questionIds)->delete();
+            $kuesioner->questions()->whereNotIn('id', $questionIds)->delete();
             foreach ($request['questions'] as $item) {
                 if (isset($item['id'])) {
-                    $question = $kuesioner->question->where('id', $item['id'])->first();
+                    $question = $kuesioner->questions->where('id', $item['id'])->first();
 
                     $question->update([
                         'question' => $item['question'],
@@ -123,7 +123,7 @@ class KuesionerController extends Controller
                 } else {
                     Question::create([
                         'kuesioner_id' => $kuesioner['id'],
-                        'question' => $item,
+                        'question' => $item['question'],
                     ]);
                 }
             }

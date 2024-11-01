@@ -85,6 +85,7 @@
                                         @method('PUT')
                                         @csrf
                                         <li>
+                                            <input type="hidden" name="responden_id" value="{{ $item->responden_id }}">
                                             {{ $item->question->question }} <br>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio"

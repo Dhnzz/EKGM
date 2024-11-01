@@ -140,6 +140,7 @@
                                             <td>{{ $item->result }}</td>
                                             <td class="text-center align-middle">
                                                 <a href="{{ route('periksaGigi.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
+                                                <a href="{{ route('periksaGigi.show_ohis', $item->id) }}" class="btn btn-sm btn-success">Ohis</a>
                                             </td>
                                         </tr>
                                     @endforeach

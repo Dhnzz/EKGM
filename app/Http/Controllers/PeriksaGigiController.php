@@ -65,10 +65,19 @@ class PeriksaGigiController extends Controller
     public function show($id)
     {
         $title = 'Periksa Gigi';
-        $subtitle = 'Tambah Periksa Gigi';
+        $subtitle = 'Detail Periksa Gigi';
         $active = 'periksaGigi';
         $periksaGigi = PeriksaGigi::findOrFail($id);
         return view('admin.master-data.periksaGigi.show', compact('title', 'subtitle', 'periksaGigi', 'active'));
+    }
+
+    public function show_ohis($id)
+    {
+        $title = 'Periksa Gigi';
+        $subtitle = 'Ohis Periksa Gigi';
+        $active = 'periksaGigi';
+        $periksaGigi = PeriksaGigi::findOrFail($id);
+        return view('admin.master-data.periksaGigi.show_ohis', compact('title', 'subtitle', 'periksaGigi', 'active'));
     }
 
     /**
@@ -77,7 +86,7 @@ class PeriksaGigiController extends Controller
     public function edit(PeriksaGigi $periksaGigi, $id)
     {
         $title = 'Periksa Gigi';
-        $subtitle = 'Tambah Periksa Gigi';
+        $subtitle = 'Edit Periksa Gigi';
         $active = 'periksaGigi';
         $periksaGigi = PeriksaGigi::findOrFail($id);
         return view('admin.master-data.periksaGigi.edit', compact('title', 'subtitle', 'periksaGigi', 'active'));

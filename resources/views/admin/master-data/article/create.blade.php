@@ -9,7 +9,7 @@
                         <a href="{{ route('dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('kuesioner.index') }}" class="text-muted">{{ $title ?? '' }}</a>
+                        <a href="{{ route('article.index') }}" class="text-muted">{{ $title ?? '' }}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">{{ $subtitle ?? '' }}</li>
                 </ol>

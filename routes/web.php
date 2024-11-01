@@ -77,6 +77,7 @@ Route::middleware(['authCheck'])->group(function () {
             Route::get('/create/{id}', [PeriksaGigiController::class, 'create'])->name('periksaGigi.create');
             Route::post('/store/{id}', [PeriksaGigiController::class, 'store'])->name('periksaGigi.store');
             Route::get('/show/{id}', [PeriksaGigiController::class, 'show'])->name('periksaGigi.show');
+        Route::get('/show_ohis/{id}', [PeriksaGigiController::class, 'show_ohis'])->name('periksaGigi.show_ohis');
             Route::get('/edit/{id}', [PeriksaGigiController::class, 'edit'])->name('periksaGigi.edit');
             Route::put('/update/{id}', [PeriksaGigiController::class, 'update'])->name('periksaGigi.update');
             Route::delete('/delete/{id}', [PeriksaGigiController::class, 'destroy'])->name('periksaGigi.delete');
