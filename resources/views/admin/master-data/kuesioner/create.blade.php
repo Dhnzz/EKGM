@@ -38,7 +38,7 @@
                             Pertanyaan</button>
                         <div class="questionContainer">
                             <div class="mb-3">
-                                <label class="control-label mb-1">Pertanyaan 1<span class="text-danger">*</span></label>
+                                <label class="control-label mb-1">Pertanyaan<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <input type="text" name="questions[]" class="form-control" placeholder="..." />
                                     <button type="button" class="btn btn-danger btn-sm"
@@ -53,7 +53,7 @@
                                 // Menghitung jumlah pertanyaan yang ada saat ini
                                 const questionCount = document.querySelectorAll('.questionsContainer .mb-3').length + 1;
                                 questionField.innerHTML = `
-                                    <label class="control-label mb-1">Pertanyaan ${questionCount} <span class="text-danger">*</span></label>
+                                    <label class="control-label mb-1">Pertanyaan<span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input type="text" name="questions[]" class="form-control" placeholder="..." />
                                         <button type="button" class="btn btn-danger btn-sm" onclick="removeQuestionField(this)">Hapus</button>

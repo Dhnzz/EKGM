@@ -9,7 +9,7 @@
                         <a href="{{ route('dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('kuesioner.index') }}" class="text-muted">{{ $title ?? '' }}</a>
+                        <a href="{{ route('article.index') }}" class="text-muted">{{ $title ?? '' }}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">{{ $subtitle ?? '' }}</li>
                 </ol>
@@ -72,7 +72,7 @@
                             <label class="control-label mb-1">URL Video</label>
                             <input type="text" name="videoUrl"
                                 class="form-control @error('videoUrl') is-invalid @enderror" placeholder="..."
-                                value="{{ old('videoUrl') }}" value="{{ $article->videoUrl ?? '' }}" />
+                                value="{{ $article->videoUrl ?? '' }}" value="{{ old('videoUrl') }}" />
                             @error('videoUrl')
                                 <small class="invalid-feedback">
                                     {{ $message }}

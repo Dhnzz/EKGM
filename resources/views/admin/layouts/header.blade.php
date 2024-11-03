@@ -7,14 +7,6 @@
                 </a>
             </li>
         </ul>
-        <ul class="navbar-nav quick-links d-none d-lg-flex">
-            <li class="nav-item">
-                <a href="{{ url('/') }}"
-                    class="nav-link">
-                    <i class="ti ti-home me-1"></i> Home Page
-                </a>
-            </li>
-        </ul>
         <div class="d-block d-lg-none">
             <img src="{{ asset('assets/front/img/favicon.png') }}" class="dark-logo" width="50" alt="" />
         </div>
@@ -33,23 +25,19 @@
                             class="rounded-circle">
                         <div class="ms-2">
                             <span class="fw-bold fs-3 p-0">
-                                Dhani
+                                {{ auth()->user()->name }}
                             </span>
                         </div>
                     </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                         <div class="message-body overflow-hidden">
-                            <a href="" class="d-flex align-items-center gap-2 dropdown-item">
-                                <i class="ti ti-user-cog fs-6"></i>
-                                <p class="mb-0 fs-3">Account Setting</p>
-                            </a>
                             <a class="btn btn-outline-primary mx-3 mt-2 d-block" href=""
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
-                            <form id="logout-form" action="" method="POST" class="d-none">
+                            <form id="logout-form" action="{{ route('login.logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </div>

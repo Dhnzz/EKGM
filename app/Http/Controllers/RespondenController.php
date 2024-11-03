@@ -184,14 +184,14 @@ class RespondenController extends Controller
     {
         // $responden = Responden::findOrFail($request)
         foreach ($request['answers'] as $item => $value) {
-            $respond = RespondenKuesioner::findOrFail($item);
+            $respond = RespondenKuesioner::where('question_id','=',$item);
             $respond->update([
                 'answer' => $value,
             ]);
         }
 
         return redirect()
-            ->route('responden.show_detail_kuesioner', $respond->responden_id)
+            ->route('responden.show_detail_kuesioner', $request->responden_id)
             ->with('success', 'Berhasil mengubah jawaban');
     }
 
