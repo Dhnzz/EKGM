@@ -46,6 +46,22 @@
         </div>
     </div>
 
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert"
+            id="success-alert">
+            <div class="d-flex gap-2 align-items-center">
+                <div>
+                    <span class="d-inline-flex p-1 rounded-circle border-2 border-white mb-0">
+                        <i class="fs-5 ti ti-check"></i>
+                    </span>
+                </div>
+                <div>
+                    {{ $message ?? '' }}
+                </div>
+            </div>
+        </div>
+    @endif
+    
     <div class="shop-detail">
         <div class="card shadow-none border">
             <div class="card-body p-4">
@@ -115,32 +131,60 @@
                                 </tbody>
                             </table>
                             <hr class="divider">
-                            <h5>Pemeriksaan Gigi :</h5>
+                            <h5>Hasil OHIS :</h5>
                             <table id="dataTable3" class="table table-sm table-bordered" width="100%">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">Gambar</th>
-                                        <th class="text-center">Tanggal</th>
-                                        <th class="text-center">Hasil</th>
-                                        <th class="text-center">Opsi</th>
+                                        <th rowspan="2" class="text-center align-middle">No</th>
+                                        <th rowspan="2" class="text-center align-middle">Date</th>
+                                        <th colspan="12" class="text-center align-middle">OHIS</th>
+                                        <th rowspan="2" class="text-center align-middle">Total DI</th>
+                                        <th rowspan="2" class="text-center align-middle">Total CI</th>
+                                        <th rowspan="2" class="text-center align-middle">OHI</th>
+                                        <th rowspan="2" class="text-center align-middle">Kesimpulan</th>
+                                        <th rowspan="2" class="text-center align-middle">Aksi</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">DI 1</th>
+                                        <th class="text-center">DI 2</th>
+                                        <th class="text-center">DI 3</th>
+                                        <th class="text-center">DI 4</th>
+                                        <th class="text-center">DI 5</th>
+                                        <th class="text-center">DI 6</th>
+                                        <th class="text-center">CI 1</th>
+                                        <th class="text-center">CI 2</th>
+                                        <th class="text-center">CI 3</th>
+                                        <th class="text-center">CI 4</th>
+                                        <th class="text-center">CI 5</th>
+                                        <th class="text-center">CI 6</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($periksaGigi as $item)
+                                    @foreach ($ohis as $item)
                                         <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td class="text-center"><img
-                                                    src="{{ asset('uploads/periksaGigi/image/' . $item->image) }}"
-                                                    width="100px" alt=""></td>
-                                            <td>{{ $item->date }}</td>
-                                            <td>{{ $item->result }}</td>
-                                            <td class="text-center align-middle">
-                                                <a href="{{ route('periksaGigi.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
-                                                <a href="{{ route('periksaGigi.show_ohis', $item->id) }}" class="btn btn-sm btn-success">Ohis</a>
+                                            <td class="text-center">{{$no++}}</td>
+                                            <td class="text-center">{{$item->date}}</td>
+                                            <td class="text-center">{{$item->di_1}}</td>
+                                            <td class="text-center">{{$item->di_2}}</td>
+                                            <td class="text-center">{{$item->di_3}}</td>
+                                            <td class="text-center">{{$item->di_4}}</td>
+                                            <td class="text-center">{{$item->di_5}}</td>
+                                            <td class="text-center">{{$item->ci_6}}</td>
+                                            <td class="text-center">{{$item->ci_1}}</td>
+                                            <td class="text-center">{{$item->ci_2}}</td>
+                                            <td class="text-center">{{$item->ci_3}}</td>
+                                            <td class="text-center">{{$item->ci_4}}</td>
+                                            <td class="text-center">{{$item->ci_5}}</td>
+                                            <td class="text-center">{{$item->ci_6}}</td>
+                                            <td class="text-center">{{$item->total_di}}</td>
+                                            <td class="text-center">{{$item->total_ci}}</td>
+                                            <td class="text-center">{{ number_format($item->ohi, 1) }}</td>
+                                            <td class="text-center">{{$item->kesimpulan}}</td>
+                                            <td class="text-center">
+                                                <a href="{{route('ohis.show', $item->id)}}" class="btn btn-sm btn-primary">Detail</a>
                                             </td>
                                         </tr>
                                     @endforeach
