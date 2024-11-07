@@ -18,8 +18,8 @@
         <div class="card-body">
             <div class="row w-100">
                 <div class="col-12 d-flex justify-content-md-end justify-content-end mt-3 mt-md-0">
-                    <a href="{{ route('responden.create') }}" class="btn btn-info d-flex align-items-center">
-                        <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah Responden
+                    <a href="{{ route('article.create') }}" class="btn btn-info d-flex align-items-center">
+                        <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah Artikel
                     </a>
                 </div>
             </div>
@@ -40,28 +40,14 @@
                 </div>
             </div>
         </div>
-    @elseif ($message = Session::get('error'))
-        <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert"
-            id="danger-alert">
-            <div class="d-flex gap-2 align-items-center">
-                <div>
-                    <span class="d-inline-flex p-1 rounded-circle border-2 border-white mb-0">
-                        <i class="fs-5 ti ti-check"></i>
-                    </span>
-                </div>
-                <div>
-                    {{ $message ?? '' }}
-                </div>
-            </div>
-        </div>
     @endif
 
     <table id="dataTable" class="table table-sm table-bordered" width="100%">
         <thead>
             <tr>
                 <th class="text-center">No</th>
-                <th class="text-center">Nama</th>
-                <th class="text-center">Nomor Telepon</th>
+                <th class="text-center">Cover</th>
+                <th class="text-center">Judul</th>
                 <th class="text-center">Opsi</th>
             </tr>
         </thead>
@@ -69,17 +55,14 @@
             @php
                 $no = 1;
             @endphp
-            @foreach ($responden as $item)
+            @foreach ($article_data as $item)
                 <tr>
                     <td class="text-center">{{ $no++ }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->phone }}</td>
+                    <td class="text-center"><img src="{{ asset('uploads/article/image/' . $item->cover) }}" width="100px"
+                            alt=""></td>
+                    <td>{{ $item->title }}</td>
                     <td class="text-center align-middle">
-                        <a href="{{ route('responden.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
-                        <a href="{{ route('responden.respond_kuesioner', $item->id) }}" class="btn btn-sm btn-success">Jawab
-                            Kuesioner</a>
-                        {{-- <a href="{{ route('todo.create', $item->id) }}" class="btn btn-sm btn-warning">Todo</a> --}}
-                        <a href="{{ route('ohis.create', $item->id) }}" class="btn btn-sm btn-warning">OHIS</a>
+                        <a href="{{ route('article.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
                     </td>
                 </tr>
             @endforeach

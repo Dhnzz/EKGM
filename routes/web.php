@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AuthController, DashboardController, RespondenController, KuesionerController, ArticleController, CategoryController, TodoController, PeriksaGigiController};
+use App\Http\Controllers\{AuthController, DashboardController, RespondenController, KuesionerController, ArticleController, CategoryController, TodoController, PeriksaGigiController, OhisController};
 
 Route::get('/', [AuthController::class, 'index'])->name('login.index');
 Route::post('/login', [AuthController::class, 'login'])->name('login.login');
@@ -73,14 +73,22 @@ Route::middleware(['authCheck'])->group(function () {
             Route::delete('/delete/{id}', [TodoController::class, 'destroy'])->name('todo.destroy');
         });
 
-        Route::prefix('periksaGigi')->group(function () {
-            Route::get('/create/{id}', [PeriksaGigiController::class, 'create'])->name('periksaGigi.create');
-            Route::post('/store/{id}', [PeriksaGigiController::class, 'store'])->name('periksaGigi.store');
-            Route::get('/show/{id}', [PeriksaGigiController::class, 'show'])->name('periksaGigi.show');
-        Route::get('/show_ohis/{id}', [PeriksaGigiController::class, 'show_ohis'])->name('periksaGigi.show_ohis');
-            Route::get('/edit/{id}', [PeriksaGigiController::class, 'edit'])->name('periksaGigi.edit');
-            Route::put('/update/{id}', [PeriksaGigiController::class, 'update'])->name('periksaGigi.update');
-            Route::delete('/delete/{id}', [PeriksaGigiController::class, 'destroy'])->name('periksaGigi.delete');
+        // Route::prefix('periksaGigi')->group(function () {
+        //     Route::get('/create/{id}', [PeriksaGigiController::class, 'create'])->name('periksaGigi.create');
+        //     Route::post('/store/{id}', [PeriksaGigiController::class, 'store'])->name('periksaGigi.store');
+        //     Route::get('/show/{id}', [PeriksaGigiController::class, 'show'])->name('periksaGigi.show');
+        //     Route::get('/show_ohis/{id}', [PeriksaGigiController::class, 'show_ohis'])->name('periksaGigi.show_ohis');
+        //     Route::get('/edit/{id}', [PeriksaGigiController::class, 'edit'])->name('periksaGigi.edit');
+        //     Route::put('/update/{id}', [PeriksaGigiController::class, 'update'])->name('periksaGigi.update');
+        //     Route::delete('/delete/{id}', [PeriksaGigiController::class, 'destroy'])->name('periksaGigi.delete');
+        // });
+        Route::prefix('ohis')->group(function(){
+            Route::get('/create/{responden}', [OhisController::class, 'create'])->name('ohis.create');
+            Route::post('/store/{responden}', [OhisController::class, 'store'])->name('ohis.store');
+            Route::get('/show/{ohis}', [OhisController::class, 'show'])->name('ohis.show');
+            Route::get('/edit/{ohis}', [OhisController::class, 'edit'])->name('ohis.edit');
+            Route::put('/update/{ohis}', [OhisController::class, 'update'])->name('ohis.update');
+            Route::delete('/delete/{ohis}', [OhisController::class, 'destroy'])->name('ohis.delete');
         });
     });
 });

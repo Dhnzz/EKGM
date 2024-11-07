@@ -23,6 +23,11 @@ class Responden extends Model
         return $this->belongsToMany(Category::class, 'todos');
     }
 
+    public function ohis(): HasMany
+    {
+        return $this->hasMany(Ohis::class);
+    }
+
     public function periksaGigi(): HasOne
     {
         return $this->hasOne(PeriksaGigi::class, 'todos');
