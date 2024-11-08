@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\ArticleApiController;
-use App\Http\Controllers\Api\CategoryApiController;
-use App\Http\Controllers\Api\KuesionerApiController;
-use App\Http\Controllers\Api\RespondenApiController;
-use App\Http\Controllers\Api\TodoApiController;
+use App\Http\Controllers\ArticleApiController;
+use App\Http\Controllers\CategoryApiController;
+use App\Http\Controllers\KuesionerApiController;
+use App\Http\Controllers\RespondenApiController;
+use App\Http\Controllers\TodoApiController;
 use Illuminate\Support\Facades\Route;
 
 // Category API Routes
