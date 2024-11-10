@@ -99,7 +99,7 @@
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->questions->count() }}</td>
                                             <td class="text-center"><a
-                                                    href="{{ route('responden.show_detail_kuesioner', $item->id) }}"
+                                                    href="{{ route('responden.show_detail_kuesioner', $item->respondenKuesioners->first()->responden_id) }}"
                                                     class="btn btn-sm btn-primary">Detail</a></td>
                                         </tr>
                                     @endforeach

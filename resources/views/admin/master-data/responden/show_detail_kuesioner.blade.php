@@ -75,7 +75,7 @@
                             <h5>Nama Kuesioner :</h5>
                             <h3 class="fw-semibold">{{ $kuesioner->first()->kuesioner->name ?? '' }}</h3>
                             <p>Dibuat tanggal : <span
-                                    class="fw-bolder">{{ $kuesioner->first()->kuesioner->created_at }}</span></p>
+                                class="fw-bolder">{{ $kuesioner->first()->kuesioner->created_at }}</span></p>
 
                             <hr class="divider">
                             <h5>Pertanyaan :</h5>
