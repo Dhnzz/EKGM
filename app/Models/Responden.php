@@ -33,4 +33,8 @@ class Responden extends Model
         return $this->hasOne(PeriksaGigi::class, 'todos');
     }
 
+    public function tbAnswer(): BelongsTo
+    {
+        return $this->belongsTo(TbAnswer::class);
+    }
 }

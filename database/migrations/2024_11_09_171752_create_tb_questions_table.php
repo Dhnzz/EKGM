@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('tb_questions', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content');
-            $table->string('cover');
-            $table->string('videoUrl')->nullable();
+            $table->text('instrument');
+            $table->text('question_sub');
+            $table->text('question_text');
+            $table->enum('question_type', ['text','integer','boolean','date']);
+            $table->enum('category', ['engaging','focusing','evoking','planning']);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('tb_questions');
     }
 };
