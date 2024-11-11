@@ -13,8 +13,12 @@ class TbQuestion extends Model
         'instrument',
         'question_sub',
         'question_text',
+        'question_json',
         'question_type',
         'category',
+    ];
+    protected $casts = [
+        'question_json' => 'array', // Meng-cast kolom JSON ke array agar lebih mudah digunakan
     ];
 
     public function tbAnswer(): BelongsTo

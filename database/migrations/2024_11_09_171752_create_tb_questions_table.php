@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->text('instrument');
             $table->text('question_sub');
-            $table->text('question_text');
-            $table->enum('question_type', ['text','integer','boolean','date']);
+            $table->text('question_text')->nullable();
+            $table->json('question_json')->nullable();
+            $table->enum('question_type', ['text','integer','boolean','date', 'json']);
             $table->enum('category', ['engaging','focusing','evoking','planning']);
             $table->timestamps();
         });
