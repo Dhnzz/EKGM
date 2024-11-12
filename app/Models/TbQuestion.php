@@ -21,8 +21,10 @@ class TbQuestion extends Model
         'question_json' => 'array', // Meng-cast kolom JSON ke array agar lebih mudah digunakan
     ];
 
-    public function tbAnswer(): BelongsTo
+    public function respondens(): BelongsToMany
     {
-        return $this->belongsTo(TbAnswer::class);
+        return $this->belongsToMany(Responden::class, 'tb_answers', 'tb_question_id', 'responden_id')
+            ->withPivot('anwswer')
+            ->withTimestamps();
     }
 }

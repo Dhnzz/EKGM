@@ -78,6 +78,8 @@
                         <a href="{{ route('responden.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a>
                         <a href="{{ route('responden.respond_kuesioner', $item->id) }}" class="btn btn-sm btn-success">Jawab
                             Kuesioner</a>
+                        <a href="{{ route('responden.tb_create', $item->id) }}" class="btn btn-sm btn-danger">Jawab
+                            Kuesioner Tooth Broshing</a>
                         {{-- <a href="{{ route('todo.create', $item->id) }}" class="btn btn-sm btn-warning">Todo</a> --}}
                         <a href="{{ route('ohis.create', $item->id) }}" class="btn btn-sm btn-warning">OHIS</a>
                     </td>

@@ -23,12 +23,16 @@ Route::middleware(['authCheck'])->group(function () {
             Route::get('/edit/{id}', [RespondenController::class, 'edit'])->name('responden.edit');
             Route::put('/update/{id}', [RespondenController::class, 'update'])->name('responden.update');
             Route::delete('/delete/{id}', [RespondenController::class, 'destroy'])->name('responden.delete');
+
             Route::get('/respond_kuesioner/{id}', [RespondenController::class, 'respond_kuesioner'])->name('responden.respond_kuesioner');
             Route::post('/respond/{id}', [RespondenController::class, 'respond'])->name('responden.respond');
             Route::get('/edit_respond/{id}', [RespondenController::class, 'edit_respond'])->name('responden.edit_respond');
             Route::put('/update_respond/{id}', [RespondenController::class, 'update_respond'])->name('responden.update_respond');
             Route::delete('/destroy_respond/{id}', [RespondenController::class, 'destroy_respond'])->name('responden.destroy_respond');
             Route::get('/show_detail_kuesioner/{id}', [RespondenController::class, 'show_detail_kuesioner'])->name('responden.show_detail_kuesioner');
+
+            // TB FUNCTION
+            Route::get('/tb_create/{id}', [RespondenController::class, 'tb_create'])->name('responden.tb_create');
         });
 
         Route::prefix('kuesioner')->group(function () {

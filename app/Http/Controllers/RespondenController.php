@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Responden, Kuesioner, RespondenKuesioner, Todo, PeriksaGigi, Ohis};
+use App\Models\{Responden, Kuesioner, RespondenKuesioner, Todo, PeriksaGigi, Ohis, TbQuestion};
 use Illuminate\Http\Request;
 
 class RespondenController extends Controller
@@ -185,7 +185,7 @@ class RespondenController extends Controller
     {
         // $responden = Responden::findOrFail($request)
         foreach ($request['answers'] as $item => $value) {
-            $respond = RespondenKuesioner::where('question_id','=',$item);
+            $respond = RespondenKuesioner::where('question_id', '=', $item);
             $respond->update([
                 'answer' => $value,
             ]);
@@ -206,5 +206,14 @@ class RespondenController extends Controller
         return redirect()
             ->route('responden.index', $respond->responden_id)
             ->with('success', 'Berhasil mengubah jawaban');
+    }
+
+    public function tb_create($id)
+    {
+        $title = 'Responden';
+        $subtitle = 'Tooth Broshing Practice';
+        $responden = Responden::findOrFail($id);
+        $tb_question = TbQuestion::all();
+        return view('admin.master-data.responden.tb_create', compact('responden', 'tb_question', 'title', 'subtitle'));
     }
 }

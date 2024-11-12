@@ -35,7 +35,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="control-label mb-1">Nomot Telepon Responden <span class="text-danger">*</span></label>
+                            <label class="control-label mb-1">Nomor Telepon Responden <span class="text-danger">*</span></label>
                             <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror"
                                 placeholder="..." value="{{ old('phone') }}" />
                             @error('phone')

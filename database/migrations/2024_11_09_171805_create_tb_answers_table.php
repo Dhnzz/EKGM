@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->integer('answer_integer')->nullable();
             $table->boolean('answer_boolean')->nullable();
             $table->text('reason_boolean')->nullable();
+            $table->date('answer_date')->nullable();
+            $table->json('answer_json')->nullable();
             $table->timestamps();
         });
     }

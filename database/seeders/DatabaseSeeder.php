@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin123'),
         ]);
 
-        
+        $this->call([
+            RespondenSeeder::class,
+            TbQuestionSeeder::class,
+        ]);
     }
 }

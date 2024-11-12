@@ -33,8 +33,10 @@ class Responden extends Model
         return $this->hasOne(PeriksaGigi::class, 'todos');
     }
 
-    public function tbAnswer(): BelongsTo
+    public function tb_questions(): BelongsToMany
     {
-        return $this->belongsTo(TbAnswer::class);
+        return $this->belongsToMany(TbQuestion::class, 'tb_answers', 'responden_id', 'tb_question_id')
+            ->withPivot('anwswer')
+            ->withTimestamps();
     }
 }

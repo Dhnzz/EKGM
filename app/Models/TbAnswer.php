@@ -16,15 +16,17 @@ class TbAnswer extends Model
         'answer_integer',
         'answer_boolean',
         'reason_boolean',
+        'answer_date',
+        'answer_json',
     ];
 
-    public function responden(): HasMany
+    public function responden(): BelongsTo
     {
-        return $this->hasMany(Responden::class);
+        return $this->belongsTo(Responden::class, 'responden_id');
     }
 
-    public function tbQuestion(): HasMany
+    public function tb_question(): BelongsTo
     {
-        return $this->hasMany(TbQuestion::class);
+        return $this->belongsTo(TbQuestion::class, 'tb_question_id');
     }
 }

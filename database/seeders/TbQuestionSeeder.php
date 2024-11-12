@@ -517,7 +517,6 @@ class TbQuestionSeeder extends Seeder
         TbQuestion::create([
             'instrument' => 'Checklist Rencana Aksi',
             'question_sub' => 'Checklist Harian Rencana Aksi',
-            'question_text' => '',
             'question_json' => [
                 'senin' => 0,
                 'selasa' => 0,
