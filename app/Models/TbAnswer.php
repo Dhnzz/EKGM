@@ -13,11 +13,14 @@ class TbAnswer extends Model
         'responden_id',
         'tb_question_id',
         'answer_text',
+        'reason_text',
         'answer_integer',
+        'reason_integer',
         'answer_boolean',
         'reason_boolean',
         'answer_date',
-        'answer_json',
+        'reason_date',
+        'reason_json',
     ];
 
     public function responden(): BelongsTo

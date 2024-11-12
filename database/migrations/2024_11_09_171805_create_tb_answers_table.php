@@ -15,11 +15,15 @@ return new class extends Migration {
             $table->foreignId('responden_id')->constrained()->onDelete('cascade');
             $table->foreignId('tb_question_id')->constrained()->onDelete('cascade');
             $table->text('answer_text')->nullable();
+            $table->text('reason_text')->nullable();
             $table->integer('answer_integer')->nullable();
+            $table->text('reason_integer')->nullable();
             $table->boolean('answer_boolean')->nullable();
             $table->text('reason_boolean')->nullable();
             $table->date('answer_date')->nullable();
+            $table->text('reason_date')->nullable();
             $table->json('answer_json')->nullable();
+            $table->text('reason_json')->nullable();
             $table->timestamps();
         });
     }
