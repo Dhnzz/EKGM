@@ -120,7 +120,7 @@ class TbQuestionSeeder extends Seeder
             'instrument' => 'Observasi dan Catatan Lapangan',
             'question_sub' => 'Respons Emosional Remaja',
             'question_text' => 'Ngoni rasa remaja nyaman atau kurang nyaman waktu bicara?',
-            'question_type' => 'json',
+            'question_type' => 'integer',
             'category' => 'engaging',
         ]);
         TbQuestion::create([

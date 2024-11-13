@@ -33,6 +33,7 @@ Route::middleware(['authCheck'])->group(function () {
 
             // TB FUNCTION
             Route::get('/tb_create/{id}', [RespondenController::class, 'tb_create'])->name('responden.tb_create');
+            Route::post('/tb_store/{id}', [RespondenController::class, 'tb_store'])->name('responden.tb_store');
         });
 
         Route::prefix('kuesioner')->group(function () {

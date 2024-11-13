@@ -18,7 +18,7 @@
     </div>
 
     <div class="card">
-        <form action="{{ route('responden.respond', $responden->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('responden.tb_store', $responden->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <h5 class="mb-3">{{ $subtitle }} Form</h5>
@@ -672,7 +672,7 @@
                                                                         <label class="form-check-label">Tidak</label>
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <textarea name="reason[${question.id}]" class="form-control" rows="2" placeholder="Catatan tambahan (opsional)"></textarea>
+                                                                        <textarea name="reasons[${question.id}]" class="form-control" rows="2" placeholder="Catatan tambahan (opsional)"></textarea>
                                                                     </div>
                                                                 `;
                                                         }

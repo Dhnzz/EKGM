@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Responden, Kuesioner, RespondenKuesioner, Todo, PeriksaGigi, Ohis, TbQuestion};
+use App\Models\{Responden, Kuesioner, RespondenKuesioner, Todo, PeriksaGigi, Ohis, TbQuestion, TbAnswer};
 use Illuminate\Http\Request;
 
 class RespondenController extends Controller
@@ -215,5 +215,84 @@ class RespondenController extends Controller
         $responden = Responden::findOrFail($id);
         $tb_question = TbQuestion::all();
         return view('admin.master-data.responden.tb_create', compact('responden', 'tb_question', 'title', 'subtitle'));
+    }
+
+    public function tb_store(Request $request, $id)
+    {
+        foreach ($request->input('answers') as $questionId => $answer) {
+            // Dapatkan tipe pertanyaan dari database
+            $question = TbQuestion::find($questionId);
+            $questionType = $question->question_type;
+
+            // Inisialisasi variabel untuk menyimpan jawaban yang diproses
+            $processedAnswer = null;
+
+            // Filter berdasarkan tipe data
+            switch ($questionType) {
+                case 'text':
+                    $processedAnswer = strval($answer); // Konversi ke string
+                    // Simpan jawaban yang telah diproses
+                    TbAnswer::create([
+                        'responden_id' => $id,
+                        'tb_question_id' => $questionId,
+                        'answer_text' => $processedAnswer,
+                        'reason_text' => $request->input('reasons.'.$questionId) // Tambah reason jika ada
+                    ]);
+                    break;
+
+                case 'integer':
+                    $processedAnswer = intval($answer); // Konversi ke integer
+                    TbAnswer::create([
+                        'responden_id' => $id,
+                        'tb_question_id' => $questionId,
+                        'answer_integer' => $processedAnswer,
+                        'reason_integer' => $request->input('reasons.'.$questionId)
+                    ]);
+                    break;
+
+                case 'date':
+                    $processedAnswer = date('Y-m-d', strtotime($answer)); // Format tanggal
+                    TbAnswer::create([
+                        'responden_id' => $id,
+                        'tb_question_id' => $questionId,
+                        'answer_date' => $processedAnswer,
+                        'reason_date' => $request->input('reasons.'.$questionId)
+                    ]);
+                    break;
+
+                case 'json':
+                    // Pastikan data JSON valid
+                    if (is_array($answer)) {
+                        $processedAnswer = json_encode($answer);
+                    } else {
+                        $processedAnswer = $answer; // Jika sudah dalam format JSON string
+                    }
+                    TbAnswer::create([
+                        'responden_id' => $id,
+                        'tb_question_id' => $questionId,
+                        'answer_json' => $processedAnswer,
+                        'reason_json' => $request->input('reasons.'.$questionId)
+                    ]);
+                    break;
+
+                case 'boolean':
+                    $processedAnswer = filter_var($answer, FILTER_VALIDATE_BOOLEAN); // Konversi ke boolean
+                    TbAnswer::create([
+                        'responden_id' => $id,
+                        'tb_question_id' => $questionId,
+                        'answer_boolean' => $processedAnswer,
+                        'reason_boolean' => $request->input('reasons.'.$questionId)
+                    ]);
+                    break;
+
+                default:
+                    $processedAnswer = $answer; // Gunakan nilai default jika tipe tidak dikenali
+                    TbAnswer::create([
+                        'responden_id' => $id,
+                        'tb_question_id' => $questionId,
+                        'answer_text' => $processedAnswer,
+                    ]);
+            }
+        }
     }
 }
