@@ -14,8 +14,6 @@ class TbQuestionSeeder extends Seeder
     public function run(): void
     {
 
-        TbQuestion::truncate();
-        
         // ENGAGING
         TbQuestion::create([
             'instrument' => 'Kuesioner keterbukaan diri',
