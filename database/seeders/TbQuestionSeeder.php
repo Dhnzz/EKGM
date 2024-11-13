@@ -573,15 +573,40 @@ class TbQuestionSeeder extends Seeder
         $activities = ['Sikat gigi pagi', 'Sikat gigi malam', 'Menggunakan benang gigi', 'Berkumur dengan mouthwash'];
         $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
         
-        $checklistAtauLembarPemantauanHarianArray = [];
-        foreach ($activities as $activity) {
-            foreach ($days as $day) {
-                $checklistAtauLembarPemantauanHarianArray[] = "{$activity} - {$day}";
-            }
-        }
+        $checklistAtauLembarPemantauanHarianArray = [
+            'Sikat gigi pagi - Senin' => false,
+            'Sikat gigi pagi - Selasa' => false, 
+            'Sikat gigi pagi - Rabu' => false,
+            'Sikat gigi pagi - Kamis' => false,
+            'Sikat gigi pagi - Jumat' => false,
+            'Sikat gigi pagi - Sabtu' => false,
+            'Sikat gigi pagi - Minggu' => false,
+            'Sikat gigi malam - Senin' => false,
+            'Sikat gigi malam - Selasa' => false,
+            'Sikat gigi malam - Rabu' => false, 
+            'Sikat gigi malam - Kamis' => false,
+            'Sikat gigi malam - Jumat' => false,
+            'Sikat gigi malam - Sabtu' => false,
+            'Sikat gigi malam - Minggu' => false,
+            'Menggunakan benang gigi - Senin' => false,
+            'Menggunakan benang gigi - Selasa' => false,
+            'Menggunakan benang gigi - Rabu' => false,
+            'Menggunakan benang gigi - Kamis' => false,
+            'Menggunakan benang gigi - Jumat' => false,
+            'Menggunakan benang gigi - Sabtu' => false,
+            'Menggunakan benang gigi - Minggu' => false,
+            'Berkumur dengan mouthwash - Senin' => false,
+            'Berkumur dengan mouthwash - Selasa' => false,
+            'Berkumur dengan mouthwash - Rabu' => false,
+            'Berkumur dengan mouthwash - Kamis' => false,
+            'Berkumur dengan mouthwash - Jumat' => false,
+            'Berkumur dengan mouthwash - Sabtu' => false,
+            'Berkumur dengan mouthwash - Minggu' => false
+        ];
+
         TbQuestion::create([
             'instrument' => 'Checklist atau Lembar Pemantauan Harian',
-            'question_sub' => 'Checklist atau Lembar Pemantauan Harian',
+            'question_sub' => 'Checklist Pemantauan Harian Kebersihan Gigi', 
             'question_json' => json_encode($checklistAtauLembarPemantauanHarianArray),
             'question_type' => 'json',
             'category' => 'planning',
@@ -626,7 +651,7 @@ class TbQuestionSeeder extends Seeder
         TbQuestion::create([
             'instrument' => 'Skala Kepatuhan Rencana',
             'question_sub' => 'Skala Kepatuhan Rencana',
-            'question_text' => 'Seberapa sering ngoni mematuhi jadwal berkumur dengan mouthwash sesuai rencana?”',
+            'question_text' => 'Seberapa sering ngoni mematuhi jadwal berkumur dengan mouthwash sesuai rencana?',
             'question_type' => 'integer',
             'category' => 'planning',
         ]);

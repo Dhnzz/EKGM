@@ -199,26 +199,18 @@
                                                     switch (instrument) {
                                                         case 'Checklist atau Lembar Pemantauan Harian':
                                                             infoText = `
-                                                                <h5 class="alert-heading">Petunjuk Pengisian Evoking - Observasi dan Catatan Lapangan:</h5>
+                                                                <h5 class="alert-heading">Petunjuk Pengisian Planning - Checklist atau Lembar Pemantauan Harian:</h5>
                                                                 <p>Silakan isi setiap pertanyaan dengan detail berdasarkan daftar tugas terkait kebersihan gigi, seperti menyikat gigi pagi dan malam, serta penggunaan benang gigi.</p>
                                                             `;
                                                             break;
-                                                        case 'Observasi dan Catatan Lapangan':
-                                                            infoText = `
-                                                                <h5 class="alert-heading">Petunjuk Pengisian Evoking - Observasi dan Catatan Lapangan:</h5>
-                                                                <p>Silakan isi setiap pertanyaan dengan detail berdasarkan pengamatan awal terhadap ekspresi verbal dan non-verbal remaja selama sesi Motivational Interviewing (MI).</p>
-                                                            `;
-                                                            break;
-                                                        case 'Checklist Rencana Aksi':
+                                                        case 'Skala Kepatuhan Rencana':
                                                             infoText = `
                                                                 <h5 class="alert-heading">Petunjuk Pengisian Evoking - Checklist Rencana Aksi:</h5>
-                                                                <p>Silakan isi setiap bagian dengan:</p>
+                                                                <p>Dokter gigi atau kader akan menilai konsistensi anda  dalam menjalankan rencana aksi pada skala 1 sampai 10:</p>
                                                                 <ul>
-                                                                    <li>Rencana aksi yang spesifik dan terukur</li>
-                                                                    <li>Target waktu pelaksanaan yang jelas</li>
-                                                                    <li>Langkah-langkah konkret yang akan dilakukan</li>
-                                                                    <li>Hambatan yang mungkin dihadapi</li>
-                                                                    <li>Strategi mengatasi hambatan</li>
+                                                                    <li>1 - 4 = Sangat Tidak Konsisten</li>
+                                                                    <li>5 - 8 = Kadang-kadang Konsisten</li>
+                                                                    <li>9 - 10 = Sangat Kons</li>
                                                                 </ul>
                                                             `;
                                                             break;
@@ -239,14 +231,190 @@
                                                 `;
 
                                                 var inputField = '';
-
+                                                var activities = ['Sikat gigi pagi', 'Sikat gigi malam', 'Menggunakan benang gigi',
+                                                    'Berkumur dengan mouthwash'
+                                                ];
+                                                var days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
                                                 // Custom input berdasarkan teks pertanyaan
                                                 switch (true) {
+                                                    case question.question_sub.trim() === 'Checklist Pemantauan Harian Kebersihan Gigi':
+                                                        inputField = `
+                                                        <table class="table table-bordered table-sm">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="text-center bg-light">Aktivitas</th>
+                                                                        <th class="text-center bg-light">Senin</th>
+                                                                        <th class="text-center bg-light">Selasa</th>
+                                                                        <th class="text-center bg-light">Rabu</th>
+                                                                        <th class="text-center bg-light">Kamis</th>
+                                                                        <th class="text-center bg-light">Jumat</th>
+                                                                        <th class="text-center bg-light">Sabtu</th>
+                                                                        <th class="text-center bg-light">Minggu</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-center fw-bold">Sikat Gigi Pagi</td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][0][0]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][0][1]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][0][2]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][0][3]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][0][4]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][0][5]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][0][6]">
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-center fw-bold">Sikat Gigi Malam</td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][1][0]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][1][1]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][1][2]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][1][3]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][1][4]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][1][5]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][1][6]">
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-center fw-bold">Menggunakan Benang Gigi</td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][2][0]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][2][1]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][2][2]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][2][3]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][2][4]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][2][5]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][2][6]">
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-center fw-bold">Berkumur Dengan Mouthwash</td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][3][0]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][3][1]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][3][2]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][3][3]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][3][4]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][3][5]">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="checkbox" class="form-check-input" name="answers[${question.id}][3][6]">
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        `;
+                                                        break;
+
                                                     case question.question_text.includes(
                                                         'Ngoni rasa remaja nyaman atau kurang nyaman waktu bicara?'):
                                                         inputField = `
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="answers[${question.id}]" value="4>
+                                                                <input class="form-check-input" type="radio" name="answers[${question.id}]" value="4">
                                                                 <label class="form-check-label">Nyaman banget</label>
                                                             </div>
                                                             <div class="form-check">
@@ -386,94 +554,22 @@
                                                     case question.question_text.includes(
                                                         'Seberapa yakin ngoni bisa melakukan kebiasaan sikat gigi ini jadi bagian rutin sehari-hari?'
                                                     ):
-                                                        inputField = `
-                                                            <table class="table table-bordered table-sm">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th colspan="3" class="text-center bg-light">Tidak Yakin Sama Sekali</th>
-                                                                        <th colspan="4" class="text-center bg-light">Setengah Yakin</th>
-                                                                        <th colspan="3" class="text-center bg-light">Sangat Yakin</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td class="text-center small">1</td>
-                                                                        <td class="text-center small">2</td>
-                                                                        <td class="text-center small">3</td>
-                                                                        <td class="text-center small">4</td>
-                                                                        <td class="text-center small">5</td>
-                                                                        <td class="text-center small">6</td>
-                                                                        <td class="text-center small">7</td>
-                                                                        <td class="text-center small">8</td>
-                                                                        <td class="text-center small">9</td>
-                                                                        <td class="text-center small">10</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-center p-2">
-                                                                            <div class="form-check d-flex justify-content-center m-0">
-                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="1">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="text-center p-2">
-                                                                            <div class="form-check d-flex justify-content-center m-0">
-                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="2">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="text-center p-2">
-                                                                            <div class="form-check d-flex justify-content-center m-0">
-                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="3">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="text-center p-2">
-                                                                            <div class="form-check d-flex justify-content-center m-0">
-                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="4">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="text-center p-2">
-                                                                            <div class="form-check d-flex justify-content-center m-0">
-                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="5">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="text-center p-2">
-                                                                            <div class="form-check d-flex justify-content-center m-0">
-                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="6">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="text-center p-2">
-                                                                            <div class="form-check d-flex justify-content-center m-0">
-                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="7">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="text-center p-2">
-                                                                            <div class="form-check d-flex justify-content-center m-0">
-                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="8">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="text-center p-2">
-                                                                            <div class="form-check d-flex justify-content-center m-0">
-                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="9">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="text-center p-2">
-                                                                            <div class="form-check d-flex justify-content-center m-0">
-                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="10">
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        `;
-                                                        break;
                                                     case question.question_text.includes(
-                                                        'Seberapa yakin ngoni bisa melakukan kebiasaan sikat gigi ini jadi bagian rutin sehari-hari?'
+                                                        'Seberapa konsisten ngoni dalam menjalankan kebiasaan menyikat gigi dua kali sehari?'
+                                                    ):
+                                                    case question.question_text.includes(
+                                                        'Seberapa konsisten ngoni dalam menggunakan benang gigi sesuai rencana?'
+                                                    ):
+                                                    case question.question_text.includes(
+                                                        'Seberapa sering ngoni mematuhi jadwal berkumur dengan mouthwash sesuai rencana?'
                                                     ):
                                                         inputField = `
                                                             <table class="table table-bordered table-sm">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th colspan="3" class="text-center bg-light">Tidak Yakin Sama Sekali</th>
-                                                                        <th colspan="4" class="text-center bg-light">Setengah Yakin</th>
-                                                                        <th colspan="3" class="text-center bg-light">Sangat Yakin</th>
+                                                                        <th colspan="4" class="text-center bg-light">Sangat Tidak Konsisten</th>
+                                                                        <th colspan="4" class="text-center bg-light">Kadang-kadang Konsisten</th>
+                                                                        <th colspan="2" class="text-center bg-light">Sangat Konsisten</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -545,7 +641,6 @@
                                                             </table>
                                                         `;
                                                         break;
-
                                                     default:
                                                         switch (question.question_type) {
                                                             case 'text':
@@ -581,6 +676,7 @@
                                                                     </div>
                                                                 `;
                                                         }
+
                                                 }
 
                                                 questionDiv.innerHTML = questionText + inputField;
