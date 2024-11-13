@@ -214,7 +214,28 @@ class RespondenController extends Controller
         $subtitle = 'Tooth Broshing Practice';
         $responden = Responden::findOrFail($id);
         $tb_question = TbQuestion::all();
-        return view('admin.master-data.responden.tb_create', compact('responden', 'tb_question', 'title', 'subtitle'));
+        $existing_answers = TbAnswer::where('responden_id', $id)
+            ->join('tb_questions', 'tb_answers.tb_question_id', '=', 'tb_questions.id')
+            ->select(
+                'tb_questions.category',
+                'tb_answers.tb_question_id',
+                'tb_answers.answer_text',
+                'tb_answers.answer_integer', 
+                'tb_answers.answer_date',
+                'tb_answers.answer_json',
+                'tb_answers.reason_text',
+                'tb_answers.reason_integer',
+                'tb_answers.reason_date',
+                'tb_answers.reason_json'
+            )
+            ->get()
+            ->groupBy('category')
+            ->map(function ($answers) {
+                return $answers->pluck('answer', 'question_id')->toArray();
+            })
+            ->toArray();
+
+        return view('admin.master-data.responden.tb_create', compact('responden', 'tb_question', 'title', 'subtitle', 'existing_answers'));
     }
 
     public function tb_store(Request $request, $id)
@@ -236,7 +257,7 @@ class RespondenController extends Controller
                         'responden_id' => $id,
                         'tb_question_id' => $questionId,
                         'answer_text' => $processedAnswer,
-                        'reason_text' => $request->input('reasons.'.$questionId) // Tambah reason jika ada
+                        'reason_text' => $request->input('reasons.' . $questionId), // Tambah reason jika ada
                     ]);
                     break;
 
@@ -246,7 +267,7 @@ class RespondenController extends Controller
                         'responden_id' => $id,
                         'tb_question_id' => $questionId,
                         'answer_integer' => $processedAnswer,
-                        'reason_integer' => $request->input('reasons.'.$questionId)
+                        'reason_integer' => $request->input('reasons.' . $questionId),
                     ]);
                     break;
 
@@ -256,7 +277,7 @@ class RespondenController extends Controller
                         'responden_id' => $id,
                         'tb_question_id' => $questionId,
                         'answer_date' => $processedAnswer,
-                        'reason_date' => $request->input('reasons.'.$questionId)
+                        'reason_date' => $request->input('reasons.' . $questionId),
                     ]);
                     break;
 
@@ -271,7 +292,7 @@ class RespondenController extends Controller
                         'responden_id' => $id,
                         'tb_question_id' => $questionId,
                         'answer_json' => $processedAnswer,
-                        'reason_json' => $request->input('reasons.'.$questionId)
+                        'reason_json' => $request->input('reasons.' . $questionId),
                     ]);
                     break;
 
@@ -281,7 +302,7 @@ class RespondenController extends Controller
                         'responden_id' => $id,
                         'tb_question_id' => $questionId,
                         'answer_boolean' => $processedAnswer,
-                        'reason_boolean' => $request->input('reasons.'.$questionId)
+                        'reason_boolean' => $request->input('reasons.' . $questionId),
                     ]);
                     break;
 

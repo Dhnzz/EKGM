@@ -44,13 +44,31 @@
                             <script>
                                 // Data questions assumed to be passed from backend (replace this example with your real data)
                                 window.allQuestions = @json($tb_question);
+                                window.existingAnswers = @json($existing_answers ?? []);
 
                                 document.getElementById('categorySelect').addEventListener('change', function() {
                                     var selectedCategory = this.value;
-                                    if (selectedCategory) {
-                                        fetchQuestionsByCategory(selectedCategory);
+                                    
+                                    // Check if category already has answers
+                                    if(window.existingAnswers && window.existingAnswers[selectedCategory]) {
+                                        document.getElementById('questionSection').innerHTML = `
+                                            <div class="alert alert-warning mt-3">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="ti ti-alert-circle me-2 fs-4"></i>
+                                                    <div>
+                                                        <h5 class="mb-0">Perhatian</h5>
+                                                        <p class="mb-0">Anda sudah mengisi kuesioner untuk kategori ini sebelumnya.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        `;
+                                        this.value = ''; // Reset select to empty
                                     } else {
-                                        document.getElementById('questionSection').innerHTML = ''; // Clear questions
+                                        if (selectedCategory) {
+                                            fetchQuestionsByCategory(selectedCategory);
+                                        } else {
+                                            document.getElementById('questionSection').innerHTML = ''; // Clear questions
+                                        }
                                     }
                                 });
 
