@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class TbAnswer extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'answer_json' => 'array', // Meng-cast kolom JSON ke array agar lebih mudah digunakan
+    ];
     protected $fillable = [
         'responden_id',
         'tb_question_id',
@@ -20,6 +23,7 @@ class TbAnswer extends Model
         'reason_boolean',
         'answer_date',
         'reason_date',
+        'answer_json',
         'reason_json',
     ];
 

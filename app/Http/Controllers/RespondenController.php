@@ -216,22 +216,16 @@ class RespondenController extends Controller
         $tb_question = TbQuestion::all();
         $existing_answers = TbAnswer::where('responden_id', $id)
             ->join('tb_questions', 'tb_answers.tb_question_id', '=', 'tb_questions.id')
-            ->select(
-                'tb_questions.category',
-                'tb_answers.tb_question_id',
-                'tb_answers.answer_text',
-                'tb_answers.answer_integer', 
-                'tb_answers.answer_date',
-                'tb_answers.answer_json',
-                'tb_answers.reason_text',
-                'tb_answers.reason_integer',
-                'tb_answers.reason_date',
-                'tb_answers.reason_json'
-            )
+            ->select('tb_questions.category', 'tb_questions.id as question_id', 'tb_answers.answer_text', 'tb_answers.answer_integer', 'tb_answers.answer_date', 'tb_answers.answer_json', 'tb_answers.reason_text', 'tb_answers.reason_integer', 'tb_answers.reason_date', 'tb_answers.reason_json')
             ->get()
             ->groupBy('category')
             ->map(function ($answers) {
-                return $answers->pluck('answer', 'question_id')->toArray();
+                $result = [];
+                foreach ($answers as $answer) {
+                    $value = $answer->answer_text ?? ($answer->answer_integer ?? ($answer->answer_date ?? $answer->answer_json));
+                    $result[$answer->question_id] = $value;
+                }
+                return $result;
             })
             ->toArray();
 
@@ -282,16 +276,25 @@ class RespondenController extends Controller
                     break;
 
                 case 'json':
-                    // Pastikan data JSON valid
-                    if (is_array($answer)) {
-                        $processedAnswer = json_encode($answer);
-                    } else {
-                        $processedAnswer = $answer; // Jika sudah dalam format JSON string
+                    $aktivitas = $request->input('answers')[77];
+                    $result = [
+                        0 => array_fill(0, 7, 0),
+                        1 => array_fill(0, 7, 0),
+                        2 => array_fill(0, 7, 0),
+                        3 => array_fill(0, 7, 0),
+                    ];
+
+                    foreach ($aktivitas as $activity => $act) {
+                        foreach ($act as $day => $answer) {
+                            if (!empty($answer)) {
+                                $result[$activity][$day] = $answer === 'on' ? 1 : $answer;
+                            }
+                        }
                     }
-                    TbAnswer::create([
+                    $jsonAnswer = TbAnswer::create([
                         'responden_id' => $id,
                         'tb_question_id' => $questionId,
-                        'answer_json' => $processedAnswer,
+                        'answer_json' => json_encode($result, JSON_FORCE_OBJECT),
                         'reason_json' => $request->input('reasons.' . $questionId),
                     ]);
                     break;
