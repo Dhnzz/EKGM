@@ -85,10 +85,10 @@
                                             // Tambahkan informasi pengisian kuesioner
                                             var infoDiv = document.createElement('div');
                                             infoDiv.className = 'alert alert-info mb-4';
-                                            
+
                                             var infoText = '';
                                             var category = document.getElementById('categorySelect').value;
-                                            
+
                                             switch (category) {
                                                 case 'engaging':
                                                     switch (instrument) {
@@ -164,6 +164,45 @@
                                                 case 'evoking':
                                                     switch (instrument) {
                                                         case 'Mengukur kepercayaan diri remaja untuk berubah':
+                                                            infoText = `
+                                                                <h5 class="alert-heading">Petunjuk Pengisian Evoking - Mengukur kepercayaan diri remaja untuk berubah:</h5>
+                                                                <p>Beri tanda pada skala dari 1 sampai 10 yang menggambarkan seberapa yakin ngoni (remaja) bisa melakukan perubahan.</p>
+                                                                <ul>
+                                                                    <li>1 - 4 = Tidak Yakin Sama Sekali</li>
+                                                                    <li>5 - 8 = Setengah yakin</li>
+                                                                    <li>9 - 10 = Sangat Yakin</li>
+                                                                </ul>
+                                                            `;
+                                                            break;
+                                                        case 'Observasi dan Catatan Lapangan':
+                                                            infoText = `
+                                                                <h5 class="alert-heading">Petunjuk Pengisian Evoking - Observasi dan Catatan Lapangan:</h5>
+                                                                <p>Silakan isi setiap pertanyaan dengan detail berdasarkan pengamatan awal terhadap ekspresi verbal dan non-verbal remaja selama sesi Motivational Interviewing (MI).</p>
+                                                            `;
+                                                            break;
+                                                        case 'Checklist Rencana Aksi':
+                                                            infoText = `
+                                                                <h5 class="alert-heading">Petunjuk Pengisian Evoking - Checklist Rencana Aksi:</h5>
+                                                                <p>Silakan isi setiap bagian dengan:</p>
+                                                                <ul>
+                                                                    <li>Rencana aksi yang spesifik dan terukur</li>
+                                                                    <li>Target waktu pelaksanaan yang jelas</li>
+                                                                    <li>Langkah-langkah konkret yang akan dilakukan</li>
+                                                                    <li>Hambatan yang mungkin dihadapi</li>
+                                                                    <li>Strategi mengatasi hambatan</li>
+                                                                </ul>
+                                                            `;
+                                                            break;
+                                                    }
+                                                    break;
+                                                case 'planning':
+                                                    switch (instrument) {
+                                                        case 'Checklist atau Lembar Pemantauan Harian':
+                                                            infoText = `
+                                                                <h5 class="alert-heading">Petunjuk Pengisian Evoking - Observasi dan Catatan Lapangan:</h5>
+                                                                <p>Silakan isi setiap pertanyaan dengan detail berdasarkan daftar tugas terkait kebersihan gigi, seperti menyikat gigi pagi dan malam, serta penggunaan benang gigi.</p>
+                                                            `;
+                                                            break;
                                                         case 'Observasi dan Catatan Lapangan':
                                                             infoText = `
                                                                 <h5 class="alert-heading">Petunjuk Pengisian Evoking - Observasi dan Catatan Lapangan:</h5>
@@ -186,10 +225,10 @@
                                                     }
                                                     break;
                                             }
-                                            
+
                                             infoDiv.innerHTML = infoText;
                                             questionSection.appendChild(infoDiv);
-                                            
+
                                             // Create list of questions for the instrument
                                             groupedQuestions[instrument].forEach(function(question) {
                                                 var questionDiv = document.createElement('div');
@@ -200,10 +239,11 @@
                                                 `;
 
                                                 var inputField = '';
-                                                
+
                                                 // Custom input berdasarkan teks pertanyaan
                                                 switch (true) {
-                                                    case question.question_text.includes('Ngoni rasa remaja nyaman atau kurang nyaman waktu bicara?'):
+                                                    case question.question_text.includes(
+                                                        'Ngoni rasa remaja nyaman atau kurang nyaman waktu bicara?'):
                                                         inputField = `
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="answers[${question.id}]" value="4>
@@ -228,7 +268,9 @@
                                                         `;
                                                         break;
 
-                                                    case question.question_text.includes('Apakah ngoni melihat remaja dalam menjawab pertanyaan dengan semangat kah atau cuma seadanya?'):
+                                                    case question.question_text.includes(
+                                                        'Apakah ngoni melihat remaja dalam menjawab pertanyaan dengan semangat kah atau cuma seadanya?'
+                                                    ):
                                                         inputField = `
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="answers[${question.id}]" value="4>
@@ -252,7 +294,9 @@
                                                             </div>
                                                         `;
                                                         break;
-                                                    case question.question_text.includes('Seberapa siap ngoni untuk mulai ubah kebiasaan menyikat gigi supaya lebih teratur dan benar?'):
+                                                    case question.question_text.includes(
+                                                        'Seberapa siap ngoni untuk mulai ubah kebiasaan menyikat gigi supaya lebih teratur dan benar?'
+                                                    ):
                                                         inputField = `
                                                             <table class="table table-bordered table-sm">
                                                                 <thead>
@@ -335,9 +379,94 @@
                                                             </div>
                                                         `;
                                                         break;
-                                                    case question.question_text.includes('Seberapa yakin ngoni bisa sikat gigi dua kali sehari secara konsisten?'):
-                                                    case question.question_text.includes('Seberapa yakin ngoni bisa mengatur waktu buat sikat gigi meski sibuk atau capek?'):
-                                                    case question.question_text.includes('Seberapa yakin ngoni bisa melakukan kebiasaan sikat gigi ini jadi bagian rutin sehari-hari?'):
+                                                    case question.question_text.includes(
+                                                        'Seberapa yakin ngoni bisa sikat gigi dua kali sehari secara konsisten?'):
+                                                    case question.question_text.includes(
+                                                        'Seberapa yakin ngoni bisa mengatur waktu buat sikat gigi meski sibuk atau capek?'):
+                                                    case question.question_text.includes(
+                                                        'Seberapa yakin ngoni bisa melakukan kebiasaan sikat gigi ini jadi bagian rutin sehari-hari?'
+                                                    ):
+                                                        inputField = `
+                                                            <table class="table table-bordered table-sm">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="3" class="text-center bg-light">Tidak Yakin Sama Sekali</th>
+                                                                        <th colspan="4" class="text-center bg-light">Setengah Yakin</th>
+                                                                        <th colspan="3" class="text-center bg-light">Sangat Yakin</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-center small">1</td>
+                                                                        <td class="text-center small">2</td>
+                                                                        <td class="text-center small">3</td>
+                                                                        <td class="text-center small">4</td>
+                                                                        <td class="text-center small">5</td>
+                                                                        <td class="text-center small">6</td>
+                                                                        <td class="text-center small">7</td>
+                                                                        <td class="text-center small">8</td>
+                                                                        <td class="text-center small">9</td>
+                                                                        <td class="text-center small">10</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="1">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="2">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="3">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="4">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="5">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="6">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="7">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="8">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="9">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center p-2">
+                                                                            <div class="form-check d-flex justify-content-center m-0">
+                                                                                <input type="radio" class="form-check-input" name="answers[${question.id}]" value="10">
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        `;
+                                                        break;
+                                                    case question.question_text.includes(
+                                                        'Seberapa yakin ngoni bisa melakukan kebiasaan sikat gigi ini jadi bagian rutin sehari-hari?'
+                                                    ):
                                                         inputField = `
                                                             <table class="table table-bordered table-sm">
                                                                 <thead>

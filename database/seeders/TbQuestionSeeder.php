@@ -13,6 +13,9 @@ class TbQuestionSeeder extends Seeder
      */
     public function run(): void
     {
+
+        TbQuestion::truncate();
+        
         // ENGAGING
         TbQuestion::create([
             'instrument' => 'Kuesioner keterbukaan diri',
@@ -568,18 +571,23 @@ class TbQuestionSeeder extends Seeder
             'category' => 'planning',
         ]);
 
+        
         $activities = ['Sikat gigi pagi', 'Sikat gigi malam', 'Menggunakan benang gigi', 'Berkumur dengan mouthwash'];
+        $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+        
+        $checklistAtauLembarPemantauanHarianArray = [];
         foreach ($activities as $activity) {
-            foreach (['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'] as $day) {
-                TbQuestion::create([
-                    'instrument' => 'Checklist atau Lembar Pemantauan Harian',
-                    'question_sub' => 'Checklist atau Lembar Pemantauan Harian',
-                    'question_text' => "{$activity} - {$day}",
-                    'question_type' => 'boolean',
-                    'category' => 'planning',
-                ]);
+            foreach ($days as $day) {
+                $checklistAtauLembarPemantauanHarianArray[] = "{$activity} - {$day}";
             }
         }
+        TbQuestion::create([
+            'instrument' => 'Checklist atau Lembar Pemantauan Harian',
+            'question_sub' => 'Checklist atau Lembar Pemantauan Harian',
+            'question_json' => json_encode($checklistAtauLembarPemantauanHarianArray),
+            'question_type' => 'json',
+            'category' => 'planning',
+        ]);
 
         TbQuestion::create([
             'instrument' => 'Checklist atau Lembar Pemantauan Harian',
