@@ -75,9 +75,13 @@ class RespondenController extends Controller
             })
             ->get();
         $todo = Todo::where('responden_id', '=', $id)->get();
+    $toothBroshing = TbAnswer::with('tb_question')->get()->groupBy(function($todo) {
+            return $todo->created_at->format('Y-m-d');
+        });
+        // dd($toothBroshing);
         // $periksaGigi = PeriksaGigi::where('responden_id', '=', $id)->get();
         $ohis = Ohis::where('responden_id', '=', $id)->get();
-        return view('admin.master-data.responden.show', compact('responden', 'title', 'active', 'subtitle', 'responden', 'kuesioner', 'todo', 'ohis'));
+        return view('admin.master-data.responden.show', compact('responden', 'title', 'active', 'subtitle', 'responden', 'kuesioner', 'todo', 'ohis','toothBroshing'));
     }
 
     /**

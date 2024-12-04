@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 class TbQuestion extends Model
 {
@@ -26,5 +26,10 @@ class TbQuestion extends Model
         return $this->belongsToMany(Responden::class, 'tb_answers', 'tb_question_id', 'responden_id')
             ->withPivot('anwswer')
             ->withTimestamps();
+    }
+
+    public function tb_answer(): HasMany
+    {
+        return $this->hasMany(TbAnswer::class);
     }
 }

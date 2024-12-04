@@ -106,8 +106,33 @@
                                 </tbody>
                             </table>
                             <hr class="divider">
-                            <h5>Todo :</h5>
+                            <h5>Hasil Tooth Broshing :</h5>
                             <table id="dataTable2" class="table table-sm table-bordered" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Tanggal</th>
+                                        <th class="text-center">Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($toothBroshing as $item => $value)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ $item }}</td>
+                                            <td class="text-center">
+                                                {{-- <a href="{{ route('todo.show', $item->id) }}" class="btn btn-sm btn-primary">Detail</a> --}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <hr class="divider">
+                            <h5>Todo :</h5>
+                            <table id="dataTable3" class="table table-sm table-bordered" width="100%">
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
@@ -132,7 +157,7 @@
                             </table>
                             <hr class="divider">
                             <h5>Hasil OHIS :</h5>
-                            <table id="dataTable3" class="table table-sm table-bordered" width="100%">
+                            <table id="dataTable4" class="table table-sm table-bordered" width="100%">
                                 <thead>
                                     <tr>
                                         <th rowspan="2" class="text-center align-middle">No</th>
@@ -228,5 +253,6 @@
         new DataTable('#dataTable');
         new DataTable('#dataTable2');
         new DataTable('#dataTable3');
+        new DataTable('#dataTable4');
     </script>
 @endpush
